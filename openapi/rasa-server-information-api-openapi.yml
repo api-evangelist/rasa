@@ -1,0 +1,152 @@
+openapi: 3.0.2
+info:
+  title: Rasa SDK - Action Server Endpoint Domain Server Information API
+  version: 0.0.0
+  description: API of the action server which is used by Rasa to execute custom actions.
+servers:
+- url: http://localhost:5055/webhook
+  description: Local development action server
+tags:
+- name: Server Information
+paths:
+  /:
+    get:
+      tags:
+      - Server Information
+      summary: Health endpoint of Rasa Server
+      operationId: getHealth
+      description: This URL can be used as an endpoint to run health checks against. When the server is running this will return 200.
+      responses:
+        200:
+          description: Up and running
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Welcome text of Rasa Server
+              example: 'Hello from Rasa: 1.0.0'
+  /version:
+    get:
+      tags:
+      - Server Information
+      operationId: getVersion
+      summary: Version of Rasa
+      description: Returns the version of Rasa.
+      responses:
+        200:
+          description: Version of Rasa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: Rasa version number
+                  minimum_compatible_version:
+                    type: string
+                    description: Minimum version this Rasa version is able to load models from
+              example:
+                version: 1.0.0
+                minimum_compatible_version: 1.0.0
+  /status:
+    get:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: getStatus
+      tags:
+      - Server Information
+      summary: Status of the Rasa server
+      description: Information about the server and the currently loaded Rasa model.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  model_id:
+                    type: string
+                    description: ID of the loaded model
+                    example: 75a985b7b86d442ca013d61ea4781b22
+                  model_file:
+                    type: string
+                    description: Path of the loaded model
+                    example: 20190429-103105.tar.gz
+                  num_active_training_jobs:
+                    type: integer
+                    description: Number of running training processes
+                    example: 2
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+components:
+  responses:
+    409Conflict:
+      description: The request conflicts with the currently loaded model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: Conflict
+            message: The request conflicts with the currently loaded model.
+            code: 409
+    403NotAuthorized:
+      description: User has insufficient permission.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthorized
+            message: User has insufficient permission to access resource.
+            code: 403
+    401NotAuthenticated:
+      description: User is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthenticated
+            message: User is not authenticated to access resource.
+            code: 401
+  schemas:
+    Error:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Rasa version
+        status:
+          type: string
+          enum:
+          - failure
+          description: Status of the requested action
+        message:
+          type: string
+          description: Error message
+        reason:
+          type: string
+          description: Error category
+        details:
+          type: object
+          description: Additional error information
+        help:
+          type: string
+          description: Optional URL to additonal material
+        code:
+          type: number
+          description: HTTP status code

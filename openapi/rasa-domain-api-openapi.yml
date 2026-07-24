@@ -1,0 +1,191 @@
+openapi: 3.0.2
+info:
+  title: Rasa SDK - Action Server Endpoint Domain API
+  version: 0.0.0
+  description: API of the action server which is used by Rasa to execute custom actions.
+servers:
+- url: http://localhost:5055/webhook
+  description: Local development action server
+tags:
+- name: Domain
+paths:
+  /domain:
+    get:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: getDomain
+      tags:
+      - Domain
+      summary: Retrieve the loaded domain
+      description: Returns the domain specification the currently loaded model is using.
+      responses:
+        200:
+          description: Domain was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/Domain'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        406:
+          $ref: '#/components/responses/406InvalidHeader'
+        500:
+          $ref: '#/components/responses/500ServerError'
+components:
+  responses:
+    406InvalidHeader:
+      description: Invalid header provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: InvalidHeader
+            message: Invalid header was provided with the request.
+            code: 406
+    500ServerError:
+      description: An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: ServerError
+            message: An unexpected error occurred.
+            code: 500
+    403NotAuthorized:
+      description: User has insufficient permission.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthorized
+            message: User has insufficient permission to access resource.
+            code: 403
+    401NotAuthenticated:
+      description: User is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthenticated
+            message: User is not authenticated to access resource.
+            code: 401
+  schemas:
+    Domain:
+      type: object
+      description: The bot's domain.
+      properties:
+        config:
+          type: object
+          description: Addional option
+          properties:
+            store_entities_as_slots:
+              type: boolean
+              description: Store all entites as slot when found
+              example: false
+        intents:
+          type: array
+          description: All intent names and properties
+          items:
+            $ref: '#/components/schemas/IntentDescription'
+        entities:
+          type: array
+          description: All entity names
+          items:
+            type: string
+          example:
+          - person
+          - location
+        slots:
+          description: Slot names and configuration
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/SlotDescription'
+        responses:
+          description: Bot response templates
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TemplateDescription'
+        actions:
+          description: Available action names
+          type: array
+          items:
+            type: string
+          example:
+          - action_greet
+          - action_goodbye
+          - action_listen
+    SlotDescription:
+      type: object
+      properties:
+        auto_fill:
+          type: boolean
+        initial_value:
+          type: string
+          nullable: true
+        type:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+      required:
+      - type
+      - auto_fill
+    Error:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Rasa version
+        status:
+          type: string
+          enum:
+          - failure
+          description: Status of the requested action
+        message:
+          type: string
+          description: Error message
+        reason:
+          type: string
+          description: Error category
+        details:
+          type: object
+          description: Additional error information
+        help:
+          type: string
+          description: Optional URL to additonal material
+        code:
+          type: number
+          description: HTTP status code
+    TemplateDescription:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Template text
+      required:
+      - text
+    IntentDescription:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          use_entities:
+            type: boolean

@@ -1,0 +1,999 @@
+openapi: 3.0.2
+info:
+  title: Rasa SDK - Action Server Endpoint Domain Tracker API
+  version: 0.0.0
+  description: API of the action server which is used by Rasa to execute custom actions.
+servers:
+- url: http://localhost:5055/webhook
+  description: Local development action server
+tags:
+- name: Tracker
+paths:
+  /conversations/{conversation_id}/tracker:
+    get:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: getConversationTracker
+      tags:
+      - Tracker
+      summary: Retrieve a conversations tracker
+      description: The tracker represents the state of the conversation. The state of the tracker is created by applying a sequence of events, which modify the state. These events can optionally be included in the response.
+      parameters:
+      - $ref: '#/components/parameters/conversation_id'
+      - $ref: '#/components/parameters/include_events'
+      - $ref: '#/components/parameters/until'
+      responses:
+        200:
+          $ref: '#/components/responses/200Tracker'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+        500:
+          $ref: '#/components/responses/500ServerError'
+  /conversations/{conversation_id}/tracker/events:
+    post:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: addConversationTrackerEvents
+      tags:
+      - Tracker
+      summary: Append events to a tracker
+      description: Appends one or multiple new events to the tracker state of the conversation. Any existing events will be kept and the new events will be appended, updating the existing state. If events are appended to a new conversation ID, the tracker will be initialised with a new session.
+      parameters:
+      - $ref: '#/components/parameters/conversation_id'
+      - $ref: '#/components/parameters/include_events'
+      - $ref: '#/components/parameters/output_channel'
+      - in: query
+        name: execute_side_effects
+        schema:
+          type: boolean
+          default: false
+          description: If `true`, any ``BotUttered`` event will be forwarded to the channel specified in the ``output_channel`` parameter. Any ``ReminderScheduled`` or ``ReminderCancelled`` event will also be processed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/Event'
+              - $ref: '#/components/schemas/EventList'
+      responses:
+        200:
+          $ref: '#/components/responses/200Tracker'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+        500:
+          $ref: '#/components/responses/500ServerError'
+    put:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: replaceConversationTrackerEvents
+      tags:
+      - Tracker
+      summary: Replace a trackers events
+      description: Replaces all events of a tracker with the passed list of events. This endpoint should not be used to modify trackers in a production setup, but rather for creating training data.
+      parameters:
+      - $ref: '#/components/parameters/conversation_id'
+      - $ref: '#/components/parameters/include_events'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventList'
+      responses:
+        200:
+          $ref: '#/components/responses/200Tracker'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+        500:
+          $ref: '#/components/responses/500ServerError'
+  /conversations/{conversation_id}/story:
+    get:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: getConversationStory
+      tags:
+      - Tracker
+      summary: Retrieve an end-to-end story corresponding to a conversation
+      description: The story represents the whole conversation in end-to-end format. This can be posted to the '/test/stories' endpoint and used as a test.
+      parameters:
+      - $ref: '#/components/parameters/conversation_id'
+      - $ref: '#/components/parameters/until'
+      - $ref: '#/components/parameters/all_sessions'
+      responses:
+        200:
+          $ref: '#/components/responses/200Story'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+        500:
+          $ref: '#/components/responses/500ServerError'
+  /conversations/{conversation_id}/execute:
+    post:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: executeConversationAction
+      tags:
+      - Tracker
+      summary: Run an action in a conversation
+      deprecated: true
+      description: DEPRECATED. Runs the action, calling the action server if necessary. Any responses sent by the executed action will be forwarded to the channel specified in the output_channel parameter. If no output channel is specified, any messages that should be sent to the user will be included in the response of this endpoint.
+      parameters:
+      - $ref: '#/components/parameters/conversation_id'
+      - $ref: '#/components/parameters/include_events'
+      - $ref: '#/components/parameters/output_channel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tracker:
+                    $ref: '#/components/schemas/Tracker'
+                  messages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BotMessage'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+        500:
+          $ref: '#/components/responses/500ServerError'
+  /conversations/{conversation_id}/trigger_intent:
+    post:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: triggerConversationIntent
+      tags:
+      - Tracker
+      summary: Inject an intent into a conversation
+      description: Sends a specified intent and list of entities in place of a user message. The bot then predicts and executes a response action. Any responses sent by the executed action will be forwarded to the channel specified in the ``output_channel`` parameter. If no output channel is specified, any messages that should be sent to the user will be included in the response of this endpoint.
+      parameters:
+      - $ref: '#/components/parameters/conversation_id'
+      - $ref: '#/components/parameters/include_events'
+      - $ref: '#/components/parameters/output_channel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntentTriggerRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tracker:
+                    $ref: '#/components/schemas/Tracker'
+                  messages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BotMessage'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+        500:
+          $ref: '#/components/responses/500ServerError'
+  /conversations/{conversation_id}/predict:
+    post:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: predictConversationAction
+      tags:
+      - Tracker
+      summary: Predict the next action
+      description: Runs the conversations tracker through the model's policies to predict the scores of all actions present in the model's domain. Actions are returned in the 'scores' array, sorted on their 'score' values. The state of the tracker is not modified.
+      parameters:
+      - $ref: '#/components/parameters/conversation_id'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictResult'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+        500:
+          $ref: '#/components/responses/500ServerError'
+  /conversations/{conversation_id}/messages:
+    post:
+      security:
+      - TokenAuth: []
+      - JWT: []
+      operationId: addConversationMessage
+      tags:
+      - Tracker
+      summary: Add a message to a tracker
+      description: Adds a message to a tracker. This doesn't trigger the prediction loop. It will log the message on the tracker and return, no actions will be predicted or run. This is often used together with the predict endpoint.
+      parameters:
+      - $ref: '#/components/parameters/conversation_id'
+      - $ref: '#/components/parameters/include_events'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+      responses:
+        200:
+          $ref: '#/components/responses/200Tracker'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401NotAuthenticated'
+        403:
+          $ref: '#/components/responses/403NotAuthorized'
+        409:
+          $ref: '#/components/responses/409Conflict'
+        500:
+          $ref: '#/components/responses/500ServerError'
+components:
+  schemas:
+    FormEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - form
+            example: form
+    SessionStartedEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - session_started
+            example: session_started
+    ActionExecutionRejectedEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - action_execution_rejected
+            example: action_execution_rejected
+    ActionRequest:
+      type: object
+      properties:
+        name:
+          description: Name of the action to be executed.
+          type: string
+          example: utter_greet
+        policy:
+          description: Name of the policy that predicted the action.
+          type: string
+          nullable: true
+        confidence:
+          description: Confidence of the prediction.
+          type: number
+          nullable: true
+          example: 0.987232
+      required:
+      - name
+    EntitiesAddedEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - entities
+            example: entities
+          entities:
+            type: array
+            items:
+              type: object
+              properties:
+                start:
+                  type: integer
+                end:
+                  type: integer
+                entity:
+                  type: string
+                confidence:
+                  type: number
+                extractor:
+                  type: string
+                  nullable: true
+                value: {}
+                role:
+                  type: string
+                  nullable: true
+                group:
+                  type: string
+                  nullable: true
+              required:
+              - entity
+              - value
+        required:
+        - entities
+    Error:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Rasa version
+        status:
+          type: string
+          enum:
+          - failure
+          description: Status of the requested action
+        message:
+          type: string
+          description: Error message
+        reason:
+          type: string
+          description: Error category
+        details:
+          type: object
+          description: Additional error information
+        help:
+          type: string
+          description: Optional URL to additonal material
+        code:
+          type: number
+          description: HTTP status code
+    SlotEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - slot
+            example: slot
+          name:
+            type: string
+          value: {}
+        required:
+        - name
+        - value
+    ParseResult:
+      type: object
+      properties:
+        entities:
+          type: array
+          description: Parsed entities
+          items:
+            $ref: '#/components/schemas/Entity'
+        intent:
+          $ref: '#/components/schemas/Intent'
+        intent_ranking:
+          type: array
+          description: Scores of all intents
+          items:
+            $ref: '#/components/schemas/Intent'
+        text:
+          type: string
+          description: Text of the message
+          example: Hello!
+      description: NLU parser information. If set, message will not be passed through NLU, but instead this parsing information will be used.
+      required:
+      - text
+    RestartEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - restart
+            example: restart
+    CancelReminderEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - cancel_reminder
+            example: cancel_reminder
+    Slot:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/SlotValue'
+      example:
+        slot_name: slot_value
+    Event:
+      anyOf:
+      - $ref: '#/components/schemas/UserEvent'
+      - $ref: '#/components/schemas/BotEvent'
+      - $ref: '#/components/schemas/SessionStartedEvent'
+      - $ref: '#/components/schemas/ActionEvent'
+      - $ref: '#/components/schemas/SlotEvent'
+      - $ref: '#/components/schemas/ResetSlotsEvent'
+      - $ref: '#/components/schemas/RestartEvent'
+      - $ref: '#/components/schemas/ReminderEvent'
+      - $ref: '#/components/schemas/CancelReminderEvent'
+      - $ref: '#/components/schemas/PauseEvent'
+      - $ref: '#/components/schemas/ResumeEvent'
+      - $ref: '#/components/schemas/FollowupEvent'
+      - $ref: '#/components/schemas/ExportEvent'
+      - $ref: '#/components/schemas/UndoEvent'
+      - $ref: '#/components/schemas/RewindEvent'
+      - $ref: '#/components/schemas/AgentEvent'
+      - $ref: '#/components/schemas/EntitiesAddedEvent'
+      - $ref: '#/components/schemas/UserFeaturizationEvent'
+      - $ref: '#/components/schemas/ActionExecutionRejectedEvent'
+      - $ref: '#/components/schemas/FormValidationEvent'
+      - $ref: '#/components/schemas/LoopInterruptedEvent'
+      - $ref: '#/components/schemas/FormEvent'
+      - $ref: '#/components/schemas/ActiveLoopEvent'
+    FormValidationEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - form_validation
+            example: form_validation
+    BotMessage:
+      type: object
+      properties:
+        recipient_id:
+          type: string
+          description: Id of the message receiver
+        text:
+          type: string
+          description: Message
+        image:
+          type: string
+          description: Image URL
+        buttons:
+          type: array
+          description: Quick reply buttons
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Button caption
+              payload:
+                type: string
+                description: Payload to be sent if button is clicked
+        attachement:
+          type: array
+          description: Additional information
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Attachement caption
+              payload:
+                type: string
+                description: Attachement payload
+    Entity:
+      type: object
+      description: Entities within a message
+      properties:
+        start:
+          type: integer
+          description: Char offset of the start
+        end:
+          type: integer
+          description: Char offset of the end
+        value:
+          type: string
+          description: Found value for entity
+        entity:
+          type: string
+          description: Type of the entity
+        confidence:
+          type: number
+      required:
+      - start
+      - end
+      - value
+      - entity
+    BotEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - bot
+            example: bot
+    SlotValue:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+    ExportEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - export
+            example: export
+    UserEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        description: Event for incoming user message.
+        properties:
+          event:
+            enum:
+            - user
+            example: user
+          text:
+            type: string
+            nullable: true
+            description: Text of user message.
+          input_channel:
+            type: string
+            nullable: true
+          message_id:
+            type: string
+            nullable: true
+          parse_data:
+            $ref: '#/components/schemas/ParseResult'
+    UndoEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - undo
+            example: undo
+    Message:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Message text
+          example: Hello!
+        sender:
+          type: string
+          description: Origin of the message - who sent it
+          example: user
+          enum:
+          - user
+        parse_data:
+          $ref: '#/components/schemas/ParseResult'
+      required:
+      - text
+      - sender
+    ReminderEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - reminder
+            example: reminder
+    ResetSlotsEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - reset_slots
+            example: reset_slots
+    EventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    ActiveLoopEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - active_loop
+            example: active_loop
+    UserFeaturizationEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - user_featurization
+            example: user_featurization
+    LoopInterruptedEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - loop_interrupted
+            example: loop_interrupted
+    IntentTriggerRequest:
+      type: object
+      properties:
+        name:
+          description: Name of the intent to be executed.
+          type: string
+          example: greet
+        entities:
+          description: Entities to be passed on.
+          type: object
+          nullable: true
+          example:
+            temperature: high
+      required:
+      - name
+    PredictResult:
+      type: object
+      properties:
+        scores:
+          type: array
+          description: Prediction results
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+                description: Action name
+                example: utter_greet
+              score:
+                type: number
+                description: Assigned score
+                example: 1.0
+        policy:
+          type: string
+          description: Policy which predicted the most likely action
+          example: policy_2_TEDPolicy
+        tracker:
+          $ref: '#/components/schemas/Tracker'
+    FollowupEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - followup
+            example: followup
+    PauseEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - pause
+            example: pause
+    LatestAction:
+      type: object
+      properties:
+        action_name:
+          type: string
+          description: latest action name
+        action_text:
+          type: string
+          description: text of last bot utterance
+      description: Latest bot action.
+    RewindEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - rewind
+            example: rewind
+    ActionEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - action
+            example: action
+          policy:
+            type: string
+            nullable: true
+          confidence:
+            type: number
+            nullable: true
+          name:
+            type: string
+            nullable: true
+          hide_rule_turn:
+            type: boolean
+          action_text:
+            type: string
+            nullable: true
+    Tracker:
+      type: object
+      description: Conversation tracker which stores the conversation state.
+      properties:
+        conversation_id:
+          type: string
+          description: ID of the conversation
+          example: default
+        slots:
+          type: array
+          description: Slot values
+          items:
+            $ref: '#/components/schemas/Slot'
+        latest_message:
+          $ref: '#/components/schemas/ParseResult'
+        latest_event_time:
+          type: number
+          description: Most recent event time
+          example: 1537645578.314389
+        followup_action:
+          type: string
+          description: Deterministic scheduled next action
+        paused:
+          type: boolean
+          description: Bot is paused
+          example: false
+        events:
+          description: Event history
+          $ref: '#/components/schemas/EventList'
+        latest_input_channel:
+          type: string
+          description: Communication channel
+          example: rest
+        latest_action_name:
+          type: string
+          description: Name of last bot action
+          example: action_listen
+        latest_action:
+          $ref: '#/components/schemas/LatestAction'
+        active_loop:
+          type: object
+          description: Name of the active loop
+          properties:
+            name:
+              type: string
+              description: Name of the active loop
+              example: restaurant_form
+    ResumeEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - resume
+            example: resume
+    Intent:
+      type: object
+      description: Intent of the text
+      properties:
+        confidence:
+          type: number
+          description: Confidence of the intent
+          example: 0.6323
+        name:
+          type: string
+          description: Intent name
+          example: greet
+      required:
+      - confidence
+      - name
+    BasicEvent:
+      type: object
+      properties:
+        event:
+          type: string
+          description: Event name
+          example: slot
+        timestamp:
+          type: integer
+          description: Time of application
+          example: null
+        metadata:
+          type: object
+          properties: {}
+          example:
+            arbitrary_metadata_key: some string
+            more_metadata: 1.0
+      required:
+      - event
+    AgentEvent:
+      allOf:
+      - $ref: '#/components/schemas/BasicEvent'
+      - type: object
+        properties:
+          event:
+            enum:
+            - agent
+            example: agent
+  responses:
+    409Conflict:
+      description: The request conflicts with the currently loaded model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: Conflict
+            message: The request conflicts with the currently loaded model.
+            code: 409
+    200Story:
+      description: Success
+      content:
+        text/yml:
+          example: "- story: story_00055028\n  steps:\n  - user: |\n      hello\n    intent: greet\n  - action: utter_ask_howcanhelp\n  - user: |\n      I'm looking for a [moderately priced]{\"entity\": \"price\", \"value\": \"moderate\"} [Indian]{\"entity\": \"cuisine\"} restaurant for [two]({\"entity\": \"people\"}) people\n    intent: inform\n  - action: utter_on_it\n  - action: utter_ask_location"
+    500ServerError:
+      description: An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: ServerError
+            message: An unexpected error occurred.
+            code: 500
+    200Tracker:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Tracker'
+    403NotAuthorized:
+      description: User has insufficient permission.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthorized
+            message: User has insufficient permission to access resource.
+            code: 403
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: BadRequest
+            code: 400
+    401NotAuthenticated:
+      description: User is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthenticated
+            message: User is not authenticated to access resource.
+            code: 401
+  parameters:
+    all_sessions:
+      in: query
+      name: all_sessions
+      description: 'Whether to fetch all sessions in a conversation, or only the latest session
+
+        * `true` - fetch all conversation sessions.
+
+        * `false` - [default] fetch only the latest conversation session.'
+      example: false
+      schema:
+        type: boolean
+        default: false
+      required: false
+    output_channel:
+      in: query
+      name: output_channel
+      description: The bot's utterances will be forwarded to this channel. It uses the credentials listed in `credentials.yml` to connect. In case the channel does not support this, the utterances will be returned in the response body. Use `latest` to try to send the messages to the latest channel the user used. Currently supported channels are listed in the permitted values for the parameter.
+      example: slack
+      schema:
+        type: string
+        enum:
+        - latest
+        - slack
+        - callback
+        - facebook
+        - rocketchat
+        - telegram
+        - twilio
+        - webexteams
+        - socketio
+    until:
+      in: query
+      name: until
+      description: All events previous to the passed timestamp will be replayed. Events that occur exactly at the target time will be included.
+      example: 1559744410
+      schema:
+        type: number
+        default: None
+      required: false
+    conversation_id:
+      in: path
+      name: conversation_id
+      description: Id of the conversation
+      example: default
+      schema:
+        type: string
+      required: true
+    include_events:
+      in: query
+      name: include_events
+      description: "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+      example: AFTER_RESTART
+      schema:
+        type: string
+        default: AFTER_RESTART
+        enum:
+        - ALL
+        - APPLIED
+        - AFTER_RESTART
+        - NONE
