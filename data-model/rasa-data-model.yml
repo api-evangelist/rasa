@@ -1,0 +1,57 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/rasa-http-api-openapi.yml
+entities:
+  - name: Tracker
+    description: The full conversation state for one conversation_id (slots, events, latest_message, active_loop).
+    relationships:
+      - has_many: Event
+        via: events
+      - has_one: Domain
+        via: (bound to the loaded model's domain)
+      - has_one: Message
+        via: latest_message
+  - name: Event
+    description: A single logged conversation event; polymorphic (UserEvent, ActionEvent, SlotEvent, BotEvent, FormEvent, ...).
+    relationships:
+      - belongs_to: Tracker
+        via: conversation_id
+  - name: Domain
+    description: Intents, entities, slots, responses, forms and actions available to the assistant.
+    relationships:
+      - has_many: Intent
+        via: intents
+      - has_many: Entity
+        via: entities
+  - name: Message
+    description: A user or bot message; carries text, intent and entities.
+    relationships:
+      - has_one: Intent
+        via: intent
+      - has_many: Entity
+        via: entities
+  - name: ParseResult
+    description: NLU parse output for a message (intent ranking + extracted entities).
+    relationships:
+      - has_one: Intent
+        via: intent
+      - has_many: Entity
+        via: entities
+  - name: Model
+    description: A trained Rasa model artifact loaded by the server.
+    relationships:
+      - has_one: Domain
+        via: domain
+identifiers:
+  conversation_id: string sender/conversation id (path param on /conversations/{conversation_id}/*)
+event_subtypes:
+  - UserEvent
+  - BotEvent
+  - ActionEvent
+  - SlotEvent
+  - FormEvent
+  - ActiveLoopEvent
+  - EntitiesAddedEvent
+  - ReminderEvent
+  - SessionStartedEvent
+  - RestartEvent

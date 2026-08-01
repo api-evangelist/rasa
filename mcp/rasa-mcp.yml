@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/rasa-http-api-openapi.yml
+note: >-
+  Rasa publishes an official "Rasa Tools" MCP server (referenced on the docs
+  home for use in Cursor, Claude Code, VS Code and JetBrains IDEs) that helps
+  developers BUILD Rasa assistants; its exact install config and tool list were
+  not captured verbatim in this pass. The tool list below is a CANDIDATE derived
+  from the self-hosted Rasa HTTP API operations, not the published Rasa Tools
+  server. Rasa CALM also natively CONSUMES external MCP tools from within flows
+  (see the rasa-agent-skills repo).
+server:
+  name: rasa
+  transport: http
+tools:
+  - name: get_status
+    description: Return the status of the Rasa server and the loaded model.
+    source_operation: openapi/rasa-http-api-openapi.yml#getStatus
+  - name: get_conversation_tracker
+    description: Retrieve the tracker (state) of a conversation by id.
+    source_operation: openapi/rasa-http-api-openapi.yml#getConversationTracker
+  - name: add_conversation_message
+    description: Add a user message to a conversation and run prediction.
+    source_operation: openapi/rasa-http-api-openapi.yml#addConversationMessage
+  - name: predict_conversation_action
+    description: Predict the next action for a conversation without executing it.
+    source_operation: openapi/rasa-http-api-openapi.yml#predictConversationAction
+  - name: execute_conversation_action
+    description: Run an action in a conversation and return the resulting events.
+    source_operation: openapi/rasa-http-api-openapi.yml#executeConversationAction
+  - name: trigger_conversation_intent
+    description: Inject an intent into a conversation as if the user had expressed it.
+    source_operation: openapi/rasa-http-api-openapi.yml#triggerConversationIntent
+  - name: parse_model_message
+    description: Parse a message with the NLU model and return intent + entities.
+    source_operation: openapi/rasa-http-api-openapi.yml#parseModelMessage
+  - name: train_model
+    description: Train a Rasa model from posted training data.
+    source_operation: openapi/rasa-http-api-openapi.yml#trainModel
+  - name: replace_model
+    description: Load/replace the active model on the server.
+    source_operation: openapi/rasa-http-api-openapi.yml#replaceModel
+  - name: get_domain
+    description: Return the domain (intents, entities, slots, responses, actions).
+    source_operation: openapi/rasa-http-api-openapi.yml#getDomain

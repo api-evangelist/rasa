@@ -1,0 +1,40 @@
+generated: '2026-07-20'
+method: searched
+source: https://rasa.com/docs/
+name: rasa
+description: >-
+  First-party command-line interface installed with the rasa / rasa-pro Python
+  package for scaffolding, training, running and testing Rasa assistants.
+install:
+  - pip install rasa-pro
+  - pip install rasa
+commands:
+  - name: rasa init
+    description: Create a new project with example training data, actions and config.
+  - name: rasa train
+    description: Train a model using NLU data, stories/flows and the domain.
+  - name: rasa shell
+    description: Load a trained model and converse with the assistant in the terminal.
+  - name: rasa run
+    description: Start the Rasa server (HTTP API) to serve a trained model.
+  - name: rasa run actions
+    description: Start the action server (rasa-sdk) for custom actions.
+  - name: rasa interactive
+    description: Interactive learning session to build training data conversationally.
+  - name: rasa test
+    description: Test a trained model on NLU data, stories and end-to-end test cases.
+  - name: rasa data
+    description: Validate, convert, split, migrate and inspect training data.
+  - name: rasa export
+    description: Export conversation events from a tracker store to an event broker.
+  - name: rasa evaluate
+    description: Evaluate model components (e.g. markers) against tracker stores.
+  - name: rasa inspect
+    description: Launch the inspector UI to debug assistant behaviour (Rasa Pro).
+  - name: rasa studio
+    description: Sync assistant data between the CLI and Rasa Studio (Rasa Pro).
+  - name: rasa license
+    description: Manage the Rasa Pro developer/enterprise license key.
+key_flows:
+  - Scaffold then train: rasa init -> rasa train -> rasa shell
+  - Serve API + actions: rasa run --enable-api & rasa run actions

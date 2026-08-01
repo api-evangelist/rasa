@@ -1,0 +1,29 @@
+# Rasa
+
+> Rasa is an open-core conversational AI framework for enterprises that natively leverages generative AI (CALM — Conversational AI with Language Models) to build reliable text and voice assistants. Rasa Pro is the pro-code framework; Rasa Studio is the no-code UI. The runtime is self-hosted and exposes an HTTP API plus a custom-action SDK.
+
+## APIs
+- [Rasa HTTP API (Server Endpoints)](https://rasa.com/docs/reference/overview/): Retrieve and modify conversation trackers, train/test/load models, parse messages. OpenAPI 3.0.1. Default server http://localhost:5005.
+- [Rasa SDK Action Server](https://rasa.com/docs/): Single POST / endpoint (call_action) that Rasa Core calls to run custom actions. OpenAPI 3.0.2.
+
+## Specs
+- [HTTP API OpenAPI](https://raw.githubusercontent.com/RasaHQ/rasa/main/docs/static/spec/rasa.yml)
+- [Action Server OpenAPI](https://raw.githubusercontent.com/RasaHQ/rasa/main/docs/static/spec/action-server.yml)
+
+## Packages
+- [rasa-pro (PyPI)](https://pypi.org/project/rasa-pro/): pip install rasa-pro
+- [rasa (PyPI)](https://pypi.org/project/rasa/): pip install rasa
+- [rasa-sdk (PyPI)](https://pypi.org/project/rasa-sdk/): pip install rasa-sdk
+
+## Docs
+- [Documentation](https://rasa.com/docs/)
+- [Quickstart](https://rasa.com/docs/learn/quickstart/pro/)
+- [Reference](https://rasa.com/docs/reference/overview/)
+- [Changelog](https://rasa.com/docs/reference/changelogs/rasa-pro-changelog/)
+- [Pricing](https://rasa.com/pricing/)
+
+## Developer
+- [GitHub (RasaHQ)](https://github.com/RasaHQ)
+- [Agent Skills (rasa-agent-skills)](https://github.com/RasaHQ/rasa-agent-skills)
+- [Blog](https://blog.rasa.com/)
+- [Community Forum](https://forum.rasa.com)

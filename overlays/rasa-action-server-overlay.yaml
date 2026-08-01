@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Rasa SDK Action Server
+  version: 1.0.0
+extends: openapi/rasa-action-server-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: rasa
+      x-apievangelist-note: >-
+        The action server (rasa-sdk) exposes a single POST / endpoint
+        (call_action) that Rasa Core calls to run custom actions and return
+        events/responses.

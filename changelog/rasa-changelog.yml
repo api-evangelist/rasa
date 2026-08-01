@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: searched
+source: https://rasa.com/docs/reference/changelogs/rasa-pro-changelog/
+scheme: semver
+current_version: 3.18.0
+note: >-
+  Rasa Pro follows Semantic Versioning from 3.3 onward; the changelog documents
+  changes across two deployable artifacts (Rasa Pro and Rasa Pro Services).
+entries:
+  - version: 3.18.0
+    date: '2026-07-20'
+    breaking: true
+    highlights:
+      - Removed deprecated LanguageModelFeaturizer
+      - Local document retrieval for Copilot
+      - Native vector store SDKs (FAISS, Qdrant, Milvus) — requires model retraining
+      - Fixed custom action state persistence; additional security patches
+  - version: 3.17.2
+    date: '2026-07-13'
+    breaking: false
+    highlights:
+      - Fixed E2E test conftest discovery
+      - Restored boto3 dependency range for AWS Bedrock compatibility
+  - version: 3.17.1
+    date: '2026-07-07'
+    breaking: false
+    highlights:
+      - Removed LanguageModelFeaturizer NLU component (CVE-2026-1839)
+      - Hardened deserialization across runtime
+  - version: 3.17.0
+    date: '2026-06-23'
+    breaking: false
+    highlights:
+      - Langfuse LLM observability integration
+      - Custom action streaming support
+      - A2A sub-agent protocol; JWT authentication for A2A
+      - Deepgram Flux ASR; MCP credential hooks
+      - AWS Marketplace license validation
+  - version: 3.16.19
+    date: '2026-07-15'
+    breaking: false
+    highlights:
+      - Fixed multiple Langfuse session IDs in DUT runs
+      - E2E test metadata handling; credentials argument defaults
+  - version: 3.16.18
+    date: '2026-07-07'
+    breaking: false
+    highlights:
+      - Removed LanguageModelFeaturizer
+      - Hardened webhook payload validation

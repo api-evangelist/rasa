@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of https://rasa.com/.well-known/*
+host: https://rasa.com
+documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /security.txt
+    status: 404
+note: >-
+  No /.well-known/ discovery documents are published on rasa.com. The Rasa HTTP
+  API is a self-hosted server (default http://localhost:5005), so authorization
+  server metadata is deployment-specific rather than published centrally.

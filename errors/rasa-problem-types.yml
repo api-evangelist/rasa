@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/rasa-http-api-openapi.yml
+format: custom
+envelope:
+  content_type: application/json
+  fields:
+    version: Rasa version string
+    status: status of the requested action (e.g. "failure")
+    reason: short machine reason (e.g. "NotAuthenticated")
+    message: human-readable error message
+    code: numeric HTTP status code
+  note: >-
+    Rasa's HTTP API returns a custom JSON error envelope, NOT RFC 9457
+    application/problem+json.
+problems:
+  - status: 400
+    reason: BadRequest
+    title: Bad Request
+    description: The request was malformed or invalid.
+  - status: 401
+    reason: NotAuthenticated
+    title: User is not authenticated
+    description: User is not authenticated to access resource.
+    remediation: >-
+      Provide a valid `token` query parameter (--auth-token) or a JWT bearer
+      token (--jwt-secret).
+  - status: 403
+    reason: NotAuthorized
+    title: User has insufficient permission
+    description: User has insufficient permission to access resource.
+    remediation: >-
+      The JWT `role` must be `admin` for restricted endpoints, or `user` with a
+      `username` matching the conversation `sender_id`.
+  - status: 406
+    reason: InvalidHeader
+    title: Invalid header provided
+    description: An invalid header was provided with the request.
+  - status: 409
+    reason: Conflict
+    title: Conflict with the currently loaded model
+    description: The request conflicts with the currently loaded model.
+  - status: 500
+    reason: ServerError
+    title: Unexpected server error
+    description: An unexpected error occurred.

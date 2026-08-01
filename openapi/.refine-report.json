@@ -1,0 +1,22 @@
+{
+  "provider": "rasa",
+  "sources": [
+    "rasa-domain-api-openapi.yml",
+    "rasa-model-api-openapi.yml",
+    "rasa-rasa-sdk-action-server-endpoint-api-openapi.yml",
+    "rasa-server-information-api-openapi.yml",
+    "rasa-tracker-api-openapi.yml"
+  ],
+  "outputs": [
+    "rasa-domain-api-openapi.yml",
+    "rasa-model-api-openapi.yml",
+    "rasa-rasa-sdk-action-server-endpoint-api-openapi.yml",
+    "rasa-server-information-api-openapi.yml",
+    "rasa-tracker-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

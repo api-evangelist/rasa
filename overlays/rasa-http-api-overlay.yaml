@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Rasa HTTP API
+  version: 1.0.0
+extends: openapi/rasa-http-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: rasa
+      x-apievangelist-artifacts:
+        - authentication/rasa-authentication.yml
+        - errors/rasa-problem-types.yml
+        - conventions/rasa-conventions.yml
+        - data-model/rasa-data-model.yml
+        - agentic-access/rasa-agentic-access.yml
+      x-apievangelist-note: >-
+        Self-hosted server; default base URL http://localhost:5005. Secured by a
+        startup --auth-token (query token) or --jwt-secret (JWT bearer).

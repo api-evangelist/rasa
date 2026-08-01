@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: searched
+source: https://rasa.com/pricing/, https://hello.rasa.com/
+free_tier:
+  name: Rasa Pro Developer Edition
+  description: >-
+    Free Rasa Pro license usable locally or in production, limited to one bot
+    per company with up to 1,000 external conversations/month (or 100 internal
+    conversations/month), with community forum support.
+  license_request: https://rasa.com/rasa-pro-developer-edition-license-key-request
+  install: pip install rasa-pro
+playground:
+  name: Hello Rasa Playground
+  url: https://hello.rasa.com/
+  description: Hosted playground / Rasa Copilot for trying Rasa without local setup.
+docker:
+  repo: https://github.com/RasaHQ/developer-edition-docker-compose
+  description: Docker Compose setup for rapid deployment of the Rasa Pro Developer Edition.
+codespaces:
+  repo: https://github.com/RasaHQ/codespaces-quickstart
+  description: Browser-based Rasa development via GitHub Codespaces.
+test_values: null
+note: >-
+  Rasa ships no payment-style test cards/tokens; the sandbox surface is the free
+  Developer Edition license plus the hosted Hello Rasa playground and local
+  Docker/Codespaces quickstarts.

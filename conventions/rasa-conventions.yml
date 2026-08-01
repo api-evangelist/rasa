@@ -1,0 +1,35 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/rasa-http-api-openapi.yml, https://rasa.com/docs/
+authentication:
+  styles:
+    - apiKey (query param `token`, set via --auth-token at server startup)
+    - JWT bearer (HS256, signed with --jwt-secret; payload carries user.username + user.role)
+  see: authentication/rasa-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    The Rasa HTTP API documents no Idempotency-Key header. State is keyed by
+    conversation_id; PUT /model and PUT tracker/events are naturally idempotent
+    by replacement, but there is no request-dedup contract.
+pagination:
+  supported: false
+  note: >-
+    Tracker/story/domain endpoints return full documents; no cursor/offset
+    pagination is defined.
+versioning:
+  scheme: semver
+  surfaced_in: GET /version and GET /status (model + Rasa version); package version pins
+  see: changelog/rasa-changelog.yml
+error_envelope:
+  content_type: application/json
+  shape: '{ version, status, reason, message, code }'
+  see: errors/rasa-problem-types.yml
+content_types:
+  request: [application/json, application/yaml]
+  response: [application/json, application/yaml, application/x-tar (trained model)]
+request_tracing:
+  supported: false
+rate_limit_signaling:
+  supported: false
+  note: self-hosted server; rate limiting is deployment-specific (ingress/gateway).

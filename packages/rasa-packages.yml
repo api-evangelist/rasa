@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: searched
+source: https://pypi.org/user/RasaHQ/
+packages:
+  - language: python
+    registry: pypi
+    name: rasa-pro
+    url: https://pypi.org/project/rasa-pro/
+    install: pip install rasa-pro
+    version: 3.18.0
+    official: true
+    description: >-
+      Open-core conversational AI framework for enterprises that natively
+      leverages generative AI (CALM) for assistant development. Maintained by
+      Rasa Technologies GmbH.
+  - language: python
+    registry: pypi
+    name: rasa
+    url: https://pypi.org/project/rasa/
+    install: pip install rasa
+    official: true
+    description: >-
+      Rasa Open Source machine learning framework to automate text- and
+      voice-based conversations (NLU + dialogue management).
+  - language: python
+    registry: pypi
+    name: rasa-sdk
+    url: https://pypi.org/project/rasa-sdk/
+    install: pip install rasa-sdk
+    version: 3.18.0
+    official: true
+    description: >-
+      Python SDK for developing custom actions (the action server) for Rasa
+      assistants.

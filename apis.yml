@@ -1,8 +1,15 @@
 aid: rasa
 name: Rasa
-description: 'Rasa is a company surfaced as a portfolio company of a16z, accel, techstars and added to
-  the API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: >-
+  Rasa is an open-core conversational AI framework for enterprises, built by Rasa
+  Technologies GmbH, that natively leverages generative AI through CALM
+  (Conversational AI with Language Models) to build reliable text and voice
+  assistants. Rasa Pro is the pro-code framework (with Flows, custom actions,
+  channel connectors, multi-LLM routing, observability and Kubernetes
+  deployment); Rasa Studio is the companion no-code UI; and Rasa Open Source
+  provides the underlying NLU and dialogue-management framework. The self-hosted
+  runtime exposes an HTTP API for managing conversation trackers and training,
+  testing and loading models, plus a Python SDK action server for custom actions.
 url: https://raw.githubusercontent.com/api-evangelist/rasa/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,18 +19,174 @@ x-backed-by:
 - techstars
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://rasa.com/favicon.ico
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Ai
-apis: []
+- Conversational AI
+- Chatbots
+- Voice Assistants
+- NLU
+- LLM
+- Machine Learning
+- Agents
+apis:
+- aid: rasa:rasa-domain-api
+  name: Rasa Domain API
+  description: The Domain API from Rasa — 1 operation(s) for domain.
+  humanURL: https://rasa.com/docs/reference/overview/
+  baseURL: http://localhost:5005
+  tags:
+  - Domain
+  properties:
+  - type: OpenAPI
+    url: openapi/rasa-domain-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/rasa-problem-types.yml
+  - type: DataModel
+    url: data-model/rasa-data-model.yml
+  - type: Documentation
+    url: https://rasa.com/docs/reference/overview/
+- aid: rasa:rasa-model-api
+  name: Rasa Model API
+  description: The Model API from Rasa — 6 operation(s) for model.
+  humanURL: https://rasa.com/docs/reference/overview/
+  baseURL: http://localhost:5005
+  tags:
+  - Model
+  properties:
+  - type: OpenAPI
+    url: openapi/rasa-model-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/rasa-problem-types.yml
+  - type: DataModel
+    url: data-model/rasa-data-model.yml
+  - type: Documentation
+    url: https://rasa.com/docs/reference/overview/
+- aid: rasa:rasa-rasa-sdk-action-server-endpoint-api
+  name: Rasa Rasa SDK Action Server Endpoint API
+  description: >-
+    The Rasa SDK Action Server Endpoint API from Rasa — 1 operation(s) for rasa sdk action server endpoint.
+  humanURL: https://rasa.com/docs/reference/overview/
+  baseURL: http://localhost:5005
+  tags:
+  - Rasa SDK Action Server Endpoint
+  properties:
+  - type: OpenAPI
+    url: openapi/rasa-rasa-sdk-action-server-endpoint-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/rasa-problem-types.yml
+  - type: DataModel
+    url: data-model/rasa-data-model.yml
+  - type: Documentation
+    url: https://rasa.com/docs/reference/overview/
+- aid: rasa:rasa-server-information-api
+  name: Rasa Server Information API
+  description: The Server Information API from Rasa — 3 operation(s) for server information.
+  humanURL: https://rasa.com/docs/reference/overview/
+  baseURL: http://localhost:5005
+  tags:
+  - Server Information
+  properties:
+  - type: OpenAPI
+    url: openapi/rasa-server-information-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/rasa-problem-types.yml
+  - type: DataModel
+    url: data-model/rasa-data-model.yml
+  - type: Documentation
+    url: https://rasa.com/docs/reference/overview/
+- aid: rasa:rasa-tracker-api
+  name: Rasa Tracker API
+  description: The Tracker API from Rasa — 7 operation(s) for tracker.
+  humanURL: https://rasa.com/docs/reference/overview/
+  baseURL: http://localhost:5005
+  tags:
+  - Tracker
+  properties:
+  - type: OpenAPI
+    url: openapi/rasa-tracker-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/rasa-problem-types.yml
+  - type: DataModel
+    url: data-model/rasa-data-model.yml
+  - type: Documentation
+    url: https://rasa.com/docs/reference/overview/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/rasa-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/rasa-agentic-access.yml
+- type: Authentication
+  url: authentication/rasa-authentication.yml
+- type: Conventions
+  url: conventions/rasa-conventions.yml
+- type: Conformance
+  url: conformance/rasa-conformance.yml
+- type: Packages
+  url: packages/rasa-packages.yml
+- type: SDKs
+  url: packages/rasa-packages.yml
+- type: CLI
+  url: cli/rasa-cli.yml
+- type: MCPServer
+  url: mcp/rasa-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/rasa-llms.txt
+- type: WellKnown
+  url: well-known/rasa-well-known.yml
+- type: Sandbox
+  url: sandbox/rasa-sandbox.yml
+- type: Lifecycle
+  url: lifecycle/rasa-lifecycle.yml
+- type: Deprecation
+  url: https://rasa.com/docs/reference/changelogs/compatibility-matrix/
+- type: ChangeLog
+  url: changelog/rasa-changelog.yml
+- type: DeveloperPortal
+  url: https://rasa.com/docs/
+- type: Documentation
+  url: https://rasa.com/docs/
+- type: APIReference
+  url: https://rasa.com/docs/reference/overview/
+- type: Quickstart
+  url: https://rasa.com/docs/learn/quickstart/pro/
+- type: GitHubOrganization
+  url: https://github.com/RasaHQ
+- type: Blog
+  url: https://blog.rasa.com/
+- type: Support
+  url: https://forum.rasa.com
+- type: Pricing
+  url: https://rasa.com/pricing/
+- type: SignUp
+  url: https://rasa.com/rasa-pro-developer-edition-license-key-request
 - type: Website
   url: https://rasa.com
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1

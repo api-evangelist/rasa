@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/RasaHQ/rasa-agent-skills
+official_skills:
+  repo: https://github.com/RasaHQ/rasa-agent-skills
+  license: Apache-2.0
+  format: Agent Skills (SKILL.md markdown + YAML frontmatter, optional references/)
+  description: >-
+    Official Rasa collection of Agent Skills that guide AI coding agents through
+    building, configuring and testing conversational AI with Rasa CALM.
+  skills:
+    - rasa-building-flows
+    - rasa-calling-mcp-tools-from-flows
+    - rasa-configuring-assistant
+    - rasa-configuring-mcp-server
+    - rasa-configuring-model-groups
+    - rasa-managing-slots
+    - rasa-rephrasing-responses
+    - rasa-setting-up-a2a-agents
+    - rasa-setting-up-enterprise-search
+    - rasa-setting-up-react-agents
+    - rasa-simulating-conversations
+    - rasa-writing-custom-actions
+    - rasa-writing-e2e-tests
+    - rasa-writing-responses
+skills:
+  - file: rasa-train-and-load-model.md
+    name: Train a Rasa model and load it on the server
+    api: openapi/rasa-http-api-openapi.yml
+    operations: [trainModel, replaceModel, getStatus]
+  - file: rasa-converse-with-assistant.md
+    name: Send a message to a conversation and read the tracker
+    api: openapi/rasa-http-api-openapi.yml
+    operations: [addConversationMessage, getConversationTracker, predictConversationAction]
