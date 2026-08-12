@@ -133,6 +133,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/rasa-action-server-overlay.yaml
 - type: DomainSecurity
   url: security/rasa-domain-security.yml
 - type: AgenticAccess
