@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rasa SDK - Action Server Endpoint Domain Model API",
+    "version": "0.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Train a Rasa model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5055/webhook/model/train",
+            "params": [
+              {
+                "name": "save_to_default_model_directory",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force_training",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "augmentation",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "num_threads",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "callback_url",
+                "value": "https://example.com/rasa_evaluations",
+                "type": "query",
+                "description": "If specified the call will return immediately with an empty response and status code 204. The actual result or any errors will be sent to the given callback URL as the body of a post request."
+              }
+            ]
+          },
+          "docs": "Trains a new Rasa model. Depending on the data given only a dialogue model, only a NLU model, or a model combining a trained dialogue model with an NLU model will be trained. The new model is not loaded by default."
+        },
+        {
+          "info": {
+            "name": "Evaluate stories",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5055/webhook/model/test/stories",
+            "params": [
+              {
+                "name": "e2e",
+                "value": "false",
+                "type": "query",
+                "description": "Perform an end-to-end evaluation on the posted stories."
+              }
+            ]
+          },
+          "docs": "Evaluates one or multiple stories against the currently loaded Rasa model."
+        },
+        {
+          "info": {
+            "name": "Perform an intent evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5055/webhook/model/test/intents",
+            "params": [
+              {
+                "name": "model",
+                "value": "rasa-model.tar.gz",
+                "type": "query",
+                "description": "Model that should be used for evaluation. If the parameter is set, the model will be fetched with the currently loaded configuration setup. However, the currently loaded model will not be updated. The state of the server will not change. If the parameter is not set, the currently loaded model will be used for the evaluation."
+              },
+              {
+                "name": "callback_url",
+                "value": "https://example.com/rasa_evaluations",
+                "type": "query",
+                "description": "If specified the call will return immediately with an empty response and status code 204. The actual result or any errors will be sent to the given callback URL as the body of a post request."
+              },
+              {
+                "name": "cross_validation_folds",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates NLU model against a model or using cross-validation."
+        },
+        {
+          "info": {
+            "name": "Predict an action on a temporary state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5055/webhook/model/predict",
+            "params": [
+              {
+                "name": "include_events",
+                "value": "AFTER_RESTART",
+                "type": "query",
+                "description": "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Predicts the next action on the tracker state as it is posted to this endpoint. Rasa will create a temporary tracker from the provided events and will use it to predict an action. No messages will be sent and no action will be run."
+        },
+        {
+          "info": {
+            "name": "Parse a message using the Rasa model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5055/webhook/model/parse",
+            "params": [
+              {
+                "name": "emulation_mode",
+                "value": "LUIS",
+                "type": "query",
+                "description": "Specify the emulation mode to use. Emulation mode transforms the response JSON to the format expected by the service specified as the emulation_mode. Requests must still be sent in the regular Rasa format."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Predicts the intent and entities of the message posted to this endpoint. No messages will be stored to a conversation and no action will be run. This will just retrieve the NLU parse results."
+        },
+        {
+          "info": {
+            "name": "Replace the currently loaded model",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5055/webhook/model",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the currently loaded model. First, tries to load the model from the local (note: local to Rasa server) storage system. Secondly, tries to load the model from the provided model server configuration. Last, tries to load the model from the provided remote storage."
+        },
+        {
+          "info": {
+            "name": "Unload the trained model",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5055/webhook/model"
+          },
+          "docs": "Unloads the currently loaded trained model from the server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

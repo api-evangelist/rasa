@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rasa SDK - Action Server Endpoint Domain Server Information API",
+    "version": "0.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health endpoint of Rasa Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5055/webhook/"
+          },
+          "docs": "This URL can be used as an endpoint to run health checks against. When the server is running this will return 200."
+        },
+        {
+          "info": {
+            "name": "Version of Rasa",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5055/webhook/version"
+          },
+          "docs": "Returns the version of Rasa."
+        },
+        {
+          "info": {
+            "name": "Status of the Rasa server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5055/webhook/status"
+          },
+          "docs": "Information about the server and the currently loaded Rasa model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

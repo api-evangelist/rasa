@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rasa SDK - Action Server Endpoint Domain API",
+    "version": "0.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domain",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the loaded domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5055/webhook/domain"
+          },
+          "docs": "Returns the domain specification the currently loaded model is using."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

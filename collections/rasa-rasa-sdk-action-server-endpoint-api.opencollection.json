@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rasa SDK - Action Server Endpoint Domain Rasa SDK Action Server Endpoint API",
+    "version": "0.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rasa SDK Action Server Endpoint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Core request to execute a custom action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5055/webhook/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Rasa Core sends a request to the action server to execute a certain custom action. As a response to the action call from Core, you can modify the tracker, e.g. by setting slots and send responses back to the user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

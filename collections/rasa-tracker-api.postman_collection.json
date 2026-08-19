@@ -1,0 +1,3247 @@
+{
+  "item": [
+    {
+      "id": "511cbde1-f271-4199-a466-50c50b3215da",
+      "name": "Tracker",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f47503a-0523-4cea-94e0-ba7af90beaee",
+          "name": "Retrieve a conversations tracker",
+          "request": {
+            "name": "Retrieve a conversations tracker",
+            "description": {
+              "content": "The tracker represents the state of the conversation. The state of the tracker is created by applying a sequence of events, which modify the state. These events can optionally be included in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversations",
+                ":conversation_id",
+                "tracker"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_events",
+                  "value": "AFTER_RESTART",
+                  "description": "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "None",
+                  "description": "All events previous to the passed timestamp will be replayed. Events that occur exactly at the target time will be included."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversation_id",
+                  "description": "(Required) Id of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "aa2ed06e-8068-4c4c-9c6e-3b48f20edbba",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conversation_id\": \"default\",\n  \"slots\": [\n    {\n      \"slot_name\": \"slot_value\"\n    },\n    {\n      \"slot_name\": \"slot_value\"\n    }\n  ],\n  \"latest_message\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": 7235,\n        \"end\": 6639,\n        \"value\": \"string\",\n        \"entity\": \"string\",\n        \"confidence\": 3985.5050583903894\n      },\n      {\n        \"start\": 3880,\n        \"end\": 736,\n        \"value\": \"string\",\n        \"entity\": \"string\",\n        \"confidence\": 8569.170224522792\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  },\n  \"latest_event_time\": 1537645578.314389,\n  \"followup_action\": \"string\",\n  \"paused\": false,\n  \"events\": [\n    {\n      \"event\": \"slot\",\n      \"timestamp\": 2577,\n      \"metadata\": {\n        \"arbitrary_metadata_key\": \"some string\",\n        \"more_metadata\": 1\n      },\n      \"text\": \"string\",\n      \"input_channel\": \"string\",\n      \"message_id\": \"string\",\n      \"parse_data\": {\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"entities\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent_ranking\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"event\": \"slot\",\n      \"timestamp\": 5519,\n      \"metadata\": {\n        \"arbitrary_metadata_key\": \"some string\",\n        \"more_metadata\": 1\n      },\n      \"text\": \"string\",\n      \"input_channel\": \"string\",\n      \"message_id\": \"string\",\n      \"parse_data\": {\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"entities\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent_ranking\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"latest_input_channel\": \"rest\",\n  \"latest_action_name\": \"action_listen\",\n  \"latest_action\": {\n    \"action_name\": \"string\",\n    \"action_text\": \"string\"\n  },\n  \"active_loop\": {\n    \"name\": \"restaurant_form\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "491fd7c4-60b0-4f40-bc92-36937f646557",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a14c8bb3-e9ac-4daf-959b-6ca045b087d2",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46573fe1-50cd-4ddd-be34-29ecfcd93fcf",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97dd948d-453f-4ea2-9dd9-84123602d59c",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7d0c9bd-970f-40c8-b2e2-8da3ebb7d7b9",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9a0e508-c501-4f67-84be-b1e500d4ab04",
+          "name": "Append events to a tracker",
+          "request": {
+            "name": "Append events to a tracker",
+            "description": {
+              "content": "Appends one or multiple new events to the tracker state of the conversation. Any existing events will be kept and the new events will be appended, updating the existing state. If events are appended to a new conversation ID, the tracker will be initialised with a new session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversations",
+                ":conversation_id",
+                "tracker",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_events",
+                  "value": "AFTER_RESTART",
+                  "description": "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_channel",
+                  "value": "<string>",
+                  "description": "The bot's utterances will be forwarded to this channel. It uses the credentials listed in `credentials.yml` to connect. In case the channel does not support this, the utterances will be returned in the response body. Use `latest` to try to send the messages to the latest channel the user used. Currently supported channels are listed in the permitted values for the parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "execute_side_effects",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversation_id",
+                  "description": "(Required) Id of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"<string>\",\n  \"timestamp\": \"<integer>\",\n  \"metadata\": {},\n  \"text\": \"<string>\",\n  \"input_channel\": \"<string>\",\n  \"message_id\": \"<string>\",\n  \"parse_data\": {\n    \"text\": \"<string>\",\n    \"entities\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"intent_ranking\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "545320c9-5390-48c9-96f4-ba6cedb06037",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    },
+                    {
+                      "key": "execute_side_effects",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"<string>\",\n  \"timestamp\": \"<integer>\",\n  \"metadata\": {\n    \"arbitrary_metadata_key\": \"some string\",\n    \"more_metadata\": 1\n  },\n  \"text\": \"<string>\",\n  \"input_channel\": \"<string>\",\n  \"message_id\": \"<string>\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"intent_ranking\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conversation_id\": \"default\",\n  \"slots\": [\n    {\n      \"slot_name\": \"slot_value\"\n    },\n    {\n      \"slot_name\": \"slot_value\"\n    }\n  ],\n  \"latest_message\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": 1833,\n        \"end\": 2515,\n        \"value\": \"string\",\n        \"entity\": \"string\",\n        \"confidence\": 4716.523335001277\n      },\n      {\n        \"start\": 6328,\n        \"end\": 2347,\n        \"value\": \"string\",\n        \"entity\": \"string\",\n        \"confidence\": 9555.35565895922\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  },\n  \"latest_event_time\": 1537645578.314389,\n  \"followup_action\": \"string\",\n  \"paused\": false,\n  \"events\": [\n    {\n      \"event\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"metadata\": {\n        \"arbitrary_metadata_key\": \"some string\",\n        \"more_metadata\": 1\n      },\n      \"text\": \"<string>\",\n      \"input_channel\": \"<string>\",\n      \"message_id\": \"<string>\",\n      \"parse_data\": {\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"entities\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent_ranking\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"event\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"metadata\": {\n        \"arbitrary_metadata_key\": \"some string\",\n        \"more_metadata\": 1\n      },\n      \"text\": \"<string>\",\n      \"input_channel\": \"<string>\",\n      \"message_id\": \"<string>\",\n      \"parse_data\": {\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"entities\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent_ranking\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"latest_input_channel\": \"rest\",\n  \"latest_action_name\": \"action_listen\",\n  \"latest_action\": {\n    \"action_name\": \"string\",\n    \"action_text\": \"string\"\n  },\n  \"active_loop\": {\n    \"name\": \"restaurant_form\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "765f3882-b7f6-4af4-9844-b89d7683951d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    },
+                    {
+                      "key": "execute_side_effects",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"<string>\",\n  \"timestamp\": \"<integer>\",\n  \"metadata\": {\n    \"arbitrary_metadata_key\": \"some string\",\n    \"more_metadata\": 1\n  },\n  \"text\": \"<string>\",\n  \"input_channel\": \"<string>\",\n  \"message_id\": \"<string>\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"intent_ranking\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47ed82ee-1370-4435-8580-60228bf82ea3",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    },
+                    {
+                      "key": "execute_side_effects",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"<string>\",\n  \"timestamp\": \"<integer>\",\n  \"metadata\": {\n    \"arbitrary_metadata_key\": \"some string\",\n    \"more_metadata\": 1\n  },\n  \"text\": \"<string>\",\n  \"input_channel\": \"<string>\",\n  \"message_id\": \"<string>\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"intent_ranking\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "568243cd-c723-4388-9d68-0607a17bc1f5",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    },
+                    {
+                      "key": "execute_side_effects",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"<string>\",\n  \"timestamp\": \"<integer>\",\n  \"metadata\": {\n    \"arbitrary_metadata_key\": \"some string\",\n    \"more_metadata\": 1\n  },\n  \"text\": \"<string>\",\n  \"input_channel\": \"<string>\",\n  \"message_id\": \"<string>\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"intent_ranking\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "637a676e-378f-4f5d-b318-1398128a0cd5",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    },
+                    {
+                      "key": "execute_side_effects",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"<string>\",\n  \"timestamp\": \"<integer>\",\n  \"metadata\": {\n    \"arbitrary_metadata_key\": \"some string\",\n    \"more_metadata\": 1\n  },\n  \"text\": \"<string>\",\n  \"input_channel\": \"<string>\",\n  \"message_id\": \"<string>\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"intent_ranking\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed08a492-7bbf-4a19-8703-055af59deb83",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    },
+                    {
+                      "key": "execute_side_effects",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"<string>\",\n  \"timestamp\": \"<integer>\",\n  \"metadata\": {\n    \"arbitrary_metadata_key\": \"some string\",\n    \"more_metadata\": 1\n  },\n  \"text\": \"<string>\",\n  \"input_channel\": \"<string>\",\n  \"message_id\": \"<string>\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"intent_ranking\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "134621f9-b082-42d7-bdba-7118bce4b683",
+          "name": "Replace a trackers events",
+          "request": {
+            "name": "Replace a trackers events",
+            "description": {
+              "content": "Replaces all events of a tracker with the passed list of events. This endpoint should not be used to modify trackers in a production setup, but rather for creating training data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversations",
+                ":conversation_id",
+                "tracker",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_events",
+                  "value": "AFTER_RESTART",
+                  "description": "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversation_id",
+                  "description": "(Required) Id of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {},\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"<string>\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {},\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"<string>\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63599ac5-2ae1-48e2-baec-b1522f290ca0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conversation_id\": \"default\",\n  \"slots\": [\n    {\n      \"slot_name\": \"slot_value\"\n    },\n    {\n      \"slot_name\": \"slot_value\"\n    }\n  ],\n  \"latest_message\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": 1833,\n        \"end\": 2515,\n        \"value\": \"string\",\n        \"entity\": \"string\",\n        \"confidence\": 4716.523335001277\n      },\n      {\n        \"start\": 6328,\n        \"end\": 2347,\n        \"value\": \"string\",\n        \"entity\": \"string\",\n        \"confidence\": 9555.35565895922\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  },\n  \"latest_event_time\": 1537645578.314389,\n  \"followup_action\": \"string\",\n  \"paused\": false,\n  \"events\": [\n    {\n      \"event\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"metadata\": {\n        \"arbitrary_metadata_key\": \"some string\",\n        \"more_metadata\": 1\n      },\n      \"text\": \"<string>\",\n      \"input_channel\": \"<string>\",\n      \"message_id\": \"<string>\",\n      \"parse_data\": {\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"entities\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent_ranking\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"event\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"metadata\": {\n        \"arbitrary_metadata_key\": \"some string\",\n        \"more_metadata\": 1\n      },\n      \"text\": \"<string>\",\n      \"input_channel\": \"<string>\",\n      \"message_id\": \"<string>\",\n      \"parse_data\": {\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"entities\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent_ranking\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"latest_input_channel\": \"rest\",\n  \"latest_action_name\": \"action_listen\",\n  \"latest_action\": {\n    \"action_name\": \"string\",\n    \"action_text\": \"string\"\n  },\n  \"active_loop\": {\n    \"name\": \"restaurant_form\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b88bb1ce-4abe-44c6-ac95-cb8cc96eea1d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d5fc17f-be07-4c1b-86c4-e0e71f3425b5",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c146583a-4f1b-4cc0-9fc1-c3c7a51d3856",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "692a97c7-ec8b-4cd1-a78f-a9ba54fb9c5e",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "952eb683-810e-4748-a782-9644a0f64482",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "tracker",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b88ac199-a8b9-4fa1-84c1-8c608647f61e",
+          "name": "Retrieve an end-to-end story corresponding to a conversation",
+          "request": {
+            "name": "Retrieve an end-to-end story corresponding to a conversation",
+            "description": {
+              "content": "The story represents the whole conversation in end-to-end format. This can be posted to the '/test/stories' endpoint and used as a test.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversations",
+                ":conversation_id",
+                "story"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "None",
+                  "description": "All events previous to the passed timestamp will be replayed. Events that occur exactly at the target time will be included."
+                },
+                {
+                  "disabled": false,
+                  "key": "all_sessions",
+                  "value": "false",
+                  "description": "Whether to fetch all sessions in a conversation, or only the latest session\n* `true` - fetch all conversation sessions.\n* `false` - [default] fetch only the latest conversation session."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversation_id",
+                  "description": "(Required) Id of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/yml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "409a5436-206a-480c-a6d1-f07850f68862",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "story"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    },
+                    {
+                      "key": "all_sessions",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/yml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/yml"
+                }
+              ],
+              "body": "- story: story_00055028\n  steps:\n  - user: |\n      hello\n    intent: greet\n  - action: utter_ask_howcanhelp\n  - user: |\n      I'm looking for a [moderately priced]{\"entity\": \"price\", \"value\": \"moderate\"} [Indian]{\"entity\": \"cuisine\"} restaurant for [two]({\"entity\": \"people\"}) people\n    intent: inform\n  - action: utter_on_it\n  - action: utter_ask_location",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fca0997a-5931-425c-ac23-7d2bf9c78c26",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "story"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    },
+                    {
+                      "key": "all_sessions",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9914437-d454-4d9e-a602-15c2a124d798",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "story"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    },
+                    {
+                      "key": "all_sessions",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51f14a28-914a-4a67-b8fc-34b6ce52e652",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "story"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    },
+                    {
+                      "key": "all_sessions",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dda19545-6060-47da-a8c0-48f418aa8c52",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "story"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "until",
+                      "value": "1559744410"
+                    },
+                    {
+                      "key": "all_sessions",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "958fc398-950a-4252-8c38-acd4d6189f63",
+          "name": "Run an action in a conversation",
+          "request": {
+            "name": "Run an action in a conversation",
+            "description": {
+              "content": "DEPRECATED. Runs the action, calling the action server if necessary. Any responses sent by the executed action will be forwarded to the channel specified in the output_channel parameter. If no output channel is specified, any messages that should be sent to the user will be included in the response of this endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversations",
+                ":conversation_id",
+                "execute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_events",
+                  "value": "AFTER_RESTART",
+                  "description": "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_channel",
+                  "value": "<string>",
+                  "description": "The bot's utterances will be forwarded to this channel. It uses the credentials listed in `credentials.yml` to connect. In case the channel does not support this, the utterances will be returned in the response body. Use `latest` to try to send the messages to the latest channel the user used. Currently supported channels are listed in the permitted values for the parameter."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversation_id",
+                  "description": "(Required) Id of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"policy\": \"<string>\",\n  \"confidence\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d00e3de8-128b-4f0f-ae87-07d0135064d5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"utter_greet\",\n  \"policy\": \"<string>\",\n  \"confidence\": 0.987232\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tracker\": {\n    \"conversation_id\": \"default\",\n    \"slots\": [\n      {\n        \"slot_name\": \"slot_value\"\n      },\n      {\n        \"slot_name\": \"slot_value\"\n      }\n    ],\n    \"latest_message\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"start\": 944,\n          \"end\": 2172,\n          \"value\": \"string\",\n          \"entity\": \"string\",\n          \"confidence\": 4357.753330877621\n        },\n        {\n          \"start\": 6085,\n          \"end\": 1155,\n          \"value\": \"string\",\n          \"entity\": \"string\",\n          \"confidence\": 6479.519450587308\n        }\n      ],\n      \"intent\": {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      \"intent_ranking\": [\n        {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        },\n        {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        }\n      ]\n    },\n    \"latest_event_time\": 1537645578.314389,\n    \"followup_action\": \"string\",\n    \"paused\": false,\n    \"events\": [\n      {\n        \"event\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"input_channel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"message_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parse_data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"event\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"input_channel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"message_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parse_data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"latest_input_channel\": \"rest\",\n    \"latest_action_name\": \"action_listen\",\n    \"latest_action\": {\n      \"action_name\": \"string\",\n      \"action_text\": \"string\"\n    },\n    \"active_loop\": {\n      \"name\": \"restaurant_form\"\n    }\n  },\n  \"messages\": [\n    {\n      \"recipient_id\": \"string\",\n      \"text\": \"string\",\n      \"image\": \"string\",\n      \"buttons\": [\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        },\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        }\n      ],\n      \"attachement\": [\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        },\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        }\n      ]\n    },\n    {\n      \"recipient_id\": \"string\",\n      \"text\": \"string\",\n      \"image\": \"string\",\n      \"buttons\": [\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        },\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        }\n      ],\n      \"attachement\": [\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        },\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec2eb798-8a6a-40bc-ad87-275469b87702",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"utter_greet\",\n  \"policy\": \"<string>\",\n  \"confidence\": 0.987232\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4310a1f-0c63-4c39-a181-0086ecdec63e",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"utter_greet\",\n  \"policy\": \"<string>\",\n  \"confidence\": 0.987232\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c66a276c-b113-4fc9-b4be-147148eadeb0",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"utter_greet\",\n  \"policy\": \"<string>\",\n  \"confidence\": 0.987232\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a09f2fae-1624-4ed8-916a-5384784e00a1",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"utter_greet\",\n  \"policy\": \"<string>\",\n  \"confidence\": 0.987232\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88b3953c-3c30-44fe-b3f3-40a2c4d54694",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"utter_greet\",\n  \"policy\": \"<string>\",\n  \"confidence\": 0.987232\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3d208a6-3feb-448a-8e1b-3e4f31e1dbdd",
+          "name": "Inject an intent into a conversation",
+          "request": {
+            "name": "Inject an intent into a conversation",
+            "description": {
+              "content": "Sends a specified intent and list of entities in place of a user message. The bot then predicts and executes a response action. Any responses sent by the executed action will be forwarded to the channel specified in the ``output_channel`` parameter. If no output channel is specified, any messages that should be sent to the user will be included in the response of this endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversations",
+                ":conversation_id",
+                "trigger_intent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_events",
+                  "value": "AFTER_RESTART",
+                  "description": "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_channel",
+                  "value": "<string>",
+                  "description": "The bot's utterances will be forwarded to this channel. It uses the credentials listed in `credentials.yml` to connect. In case the channel does not support this, the utterances will be returned in the response body. Use `latest` to try to send the messages to the latest channel the user used. Currently supported channels are listed in the permitted values for the parameter."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversation_id",
+                  "description": "(Required) Id of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"entities\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2958a146-6088-4f66-a262-f8fe6d60a900",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "trigger_intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"greet\",\n  \"entities\": {\n    \"temperature\": \"high\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tracker\": {\n    \"conversation_id\": \"default\",\n    \"slots\": [\n      {\n        \"slot_name\": \"slot_value\"\n      },\n      {\n        \"slot_name\": \"slot_value\"\n      }\n    ],\n    \"latest_message\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"start\": 6914,\n          \"end\": 6279,\n          \"value\": \"string\",\n          \"entity\": \"string\",\n          \"confidence\": 2371.524176492601\n        },\n        {\n          \"start\": 7832,\n          \"end\": 3540,\n          \"value\": \"string\",\n          \"entity\": \"string\",\n          \"confidence\": 6626.850119038971\n        }\n      ],\n      \"intent\": {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      \"intent_ranking\": [\n        {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        },\n        {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        }\n      ]\n    },\n    \"latest_event_time\": 1537645578.314389,\n    \"followup_action\": \"string\",\n    \"paused\": false,\n    \"events\": [\n      {\n        \"event\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"input_channel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"message_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parse_data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"event\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"input_channel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"message_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parse_data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"latest_input_channel\": \"rest\",\n    \"latest_action_name\": \"action_listen\",\n    \"latest_action\": {\n      \"action_name\": \"string\",\n      \"action_text\": \"string\"\n    },\n    \"active_loop\": {\n      \"name\": \"restaurant_form\"\n    }\n  },\n  \"messages\": [\n    {\n      \"recipient_id\": \"string\",\n      \"text\": \"string\",\n      \"image\": \"string\",\n      \"buttons\": [\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        },\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        }\n      ],\n      \"attachement\": [\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        },\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        }\n      ]\n    },\n    {\n      \"recipient_id\": \"string\",\n      \"text\": \"string\",\n      \"image\": \"string\",\n      \"buttons\": [\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        },\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        }\n      ],\n      \"attachement\": [\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        },\n        {\n          \"title\": \"string\",\n          \"payload\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4dd4342-47f6-4b11-95d5-38669594b99e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "trigger_intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"greet\",\n  \"entities\": {\n    \"temperature\": \"high\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3038e706-c0ba-472b-92d1-ef39e1725af0",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "trigger_intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"greet\",\n  \"entities\": {\n    \"temperature\": \"high\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84d082f4-c6fd-4759-bc35-b82df8cf2bf2",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "trigger_intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"greet\",\n  \"entities\": {\n    \"temperature\": \"high\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7c0dfce-4a9b-4d85-ae6f-35eb38d49c4b",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "trigger_intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"greet\",\n  \"entities\": {\n    \"temperature\": \"high\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38929cdf-01b1-4288-8fe0-b00a0b6d1b9a",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "trigger_intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    },
+                    {
+                      "key": "output_channel",
+                      "value": "slack"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"greet\",\n  \"entities\": {\n    \"temperature\": \"high\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "931bfe9b-4044-45e0-8e44-11dbb7686369",
+          "name": "Predict the next action",
+          "request": {
+            "name": "Predict the next action",
+            "description": {
+              "content": "Runs the conversations tracker through the model's policies to predict the scores of all actions present in the model's domain. Actions are returned in the 'scores' array, sorted on their 'score' values. The state of the tracker is not modified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversations",
+                ":conversation_id",
+                "predict"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversation_id",
+                  "description": "(Required) Id of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "8aab371b-5958-493d-a0e3-265e9ca7f0cd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scores\": [\n    {\n      \"action\": \"utter_greet\",\n      \"score\": 1\n    },\n    {\n      \"action\": \"utter_greet\",\n      \"score\": 1\n    }\n  ],\n  \"policy\": \"policy_2_TEDPolicy\",\n  \"tracker\": {\n    \"conversation_id\": \"default\",\n    \"slots\": [\n      {\n        \"slot_name\": \"slot_value\"\n      },\n      {\n        \"slot_name\": \"slot_value\"\n      }\n    ],\n    \"latest_message\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"start\": 4583,\n          \"end\": 918,\n          \"value\": \"string\",\n          \"entity\": \"string\",\n          \"confidence\": 878.7691529585795\n        },\n        {\n          \"start\": 819,\n          \"end\": 4011,\n          \"value\": \"string\",\n          \"entity\": \"string\",\n          \"confidence\": 9847.991780155828\n        }\n      ],\n      \"intent\": {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      \"intent_ranking\": [\n        {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        },\n        {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        }\n      ]\n    },\n    \"latest_event_time\": 1537645578.314389,\n    \"followup_action\": \"string\",\n    \"paused\": false,\n    \"events\": [\n      {\n        \"event\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"input_channel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"message_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parse_data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"event\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"input_channel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"message_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parse_data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"latest_input_channel\": \"rest\",\n    \"latest_action_name\": \"action_listen\",\n    \"latest_action\": {\n      \"action_name\": \"string\",\n      \"action_text\": \"string\"\n    },\n    \"active_loop\": {\n      \"name\": \"restaurant_form\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d070f4b5-12c9-467b-9b59-e1f9b9eff59c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05434647-81f4-47de-89a8-30307ba47834",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1b4d295-82ea-41bb-abda-5c33c26b6e4c",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6f1229d-e278-42b1-b58c-dec5af5f13bf",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8868d4a7-f83d-4cef-bec3-18c721ab1bd2",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "713ffa92-e925-4d8f-a599-05a047fa83fd",
+          "name": "Add a message to a tracker",
+          "request": {
+            "name": "Add a message to a tracker",
+            "description": {
+              "content": "Adds a message to a tracker. This doesn't trigger the prediction loop. It will log the message on the tracker and return, no actions will be predicted or run. This is often used together with the predict endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversations",
+                ":conversation_id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_events",
+                  "value": "AFTER_RESTART",
+                  "description": "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversation_id",
+                  "description": "(Required) Id of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"sender\": \"<string>\",\n  \"parse_data\": {\n    \"text\": \"<string>\",\n    \"entities\": [\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      },\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": \"<number>\",\n      \"name\": \"<string>\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": \"<number>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"confidence\": \"<number>\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "786703b2-1aa8-4325-8eec-096a671bfb2f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello!\",\n  \"sender\": \"user\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      },\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conversation_id\": \"default\",\n  \"slots\": [\n    {\n      \"slot_name\": \"slot_value\"\n    },\n    {\n      \"slot_name\": \"slot_value\"\n    }\n  ],\n  \"latest_message\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      },\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  },\n  \"latest_event_time\": 1537645578.314389,\n  \"followup_action\": \"string\",\n  \"paused\": false,\n  \"events\": [\n    {\n      \"event\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"metadata\": {\n        \"arbitrary_metadata_key\": \"some string\",\n        \"more_metadata\": 1\n      },\n      \"text\": \"<string>\",\n      \"input_channel\": \"<string>\",\n      \"message_id\": \"<string>\",\n      \"parse_data\": {\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"entities\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent_ranking\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"event\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"metadata\": {\n        \"arbitrary_metadata_key\": \"some string\",\n        \"more_metadata\": 1\n      },\n      \"text\": \"<string>\",\n      \"input_channel\": \"<string>\",\n      \"message_id\": \"<string>\",\n      \"parse_data\": {\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"entities\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intent_ranking\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"latest_input_channel\": \"rest\",\n  \"latest_action_name\": \"action_listen\",\n  \"latest_action\": {\n    \"action_name\": \"string\",\n    \"action_text\": \"string\"\n  },\n  \"active_loop\": {\n    \"name\": \"restaurant_form\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98bb5607-b6a1-4ddd-9a02-5b4888412521",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello!\",\n  \"sender\": \"user\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      },\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "106f894b-0b33-45ab-b84f-51cda749c14e",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello!\",\n  \"sender\": \"user\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      },\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "158d108a-a2b9-4d74-9965-6dfb3abf3b5b",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello!\",\n  \"sender\": \"user\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      },\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e2adbdc-e12c-40da-a75e-998d9f2b1732",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello!\",\n  \"sender\": \"user\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      },\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28026ee9-3bc3-41bf-baf2-18e68e749f19",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversation_id",
+                      "description": "(Required) Id of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello!\",\n  \"sender\": \"user\",\n  \"parse_data\": {\n    \"text\": \"Hello!\",\n    \"entities\": [\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      },\n      {\n        \"start\": \"<integer>\",\n        \"end\": \"<integer>\",\n        \"value\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"confidence\": \"<number>\"\n      }\n    ],\n    \"intent\": {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    \"intent_ranking\": [\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:5055/webhook",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "40969519-f56c-4c18-a563-33b125e6d4ba",
+    "name": "Rasa SDK - Action Server Endpoint Domain Tracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API of the action server which is used by Rasa to execute custom actions.",
+      "type": "text/plain"
+    }
+  }
+}

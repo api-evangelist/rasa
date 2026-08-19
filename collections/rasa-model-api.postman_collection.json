@@ -1,0 +1,2288 @@
+{
+  "item": [
+    {
+      "id": "0538dba4-5ecb-4a31-abaa-22e8f0a6704a",
+      "name": "Model",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f5d6017-8da0-474b-a7ca-c5b2200a056a",
+          "name": "Train a Rasa model",
+          "request": {
+            "name": "Train a Rasa model",
+            "description": {
+              "content": "Trains a new Rasa model. Depending on the data given only a dialogue model, only a NLU model, or a model combining a trained dialogue model with an NLU model will be trained. The new model is not loaded by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "train"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "save_to_default_model_directory",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "force_training",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "augmentation",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "num_threads",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "callback_url",
+                  "value": "None",
+                  "description": "If specified the call will return immediately with an empty response and status code 204. The actual result or any errors will be sent to the given callback URL as the body of a post request."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/yaml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pipeline\": \"<array>\",\n  \"policies\": \"<array>\",\n  \"entities\": \"<array>\",\n  \"slots\": \"<array>\",\n  \"actions\": \"<array>\",\n  \"forms\": \"<array>\",\n  \"e2e_actions\": \"<array>\",\n  \"responses\": {\n    \"key_0\": {\n      \"text\": \"<string>\"\n    },\n    \"key_1\": {\n      \"text\": \"<string>\"\n    },\n    \"key_2\": {\n      \"text\": \"<string>\"\n    }\n  },\n  \"session_config\": {\n    \"session_expiration_time\": \"<integer>\",\n    \"carry_over_slots_to_new_session\": \"<boolean>\"\n  },\n  \"nlu\": \"<array>\",\n  \"rules\": \"<array>\",\n  \"stories\": \"<array>\",\n  \"force\": \"<boolean>\",\n  \"save_to_default_model_directory\": \"<boolean>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "be0f64d8-eeca-4ac3-9e6a-a5d0215c6fbc",
+              "name": "Zipped Rasa model",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "save_to_default_model_directory",
+                      "value": "true"
+                    },
+                    {
+                      "key": "force_training",
+                      "value": "false"
+                    },
+                    {
+                      "key": "augmentation",
+                      "value": "50"
+                    },
+                    {
+                      "key": "num_threads",
+                      "value": "1"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "pipeline: []\n\npolicies: []\n\nintents:\n  - greet\n  - goodbye\n\nentities: []\nslots: {}\nactions: []\nforms: {}\ne2e_actions: []\n\nresponses:\n  utter_greet:\n  - text: \"Hey! How are you?\"\n\n  utter_goodbye:\n  - text: \"Bye\"\n\nsession_config:\n  session_expiration_time: 60\n  carry_over_slots_to_new_session: true\n\nnlu:\n- intent: greet\n  examples: |\n    - hey\n    - hello\n\n- intent: goodbye\n  examples: |\n    - bye\n    - goodbye\n\nrules:\n\n- rule: Say goodbye anytime the user says goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye\n\nstories:\n\n- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: goodbye\n  - action: utter_goodbye\n"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "File name of the trained model.",
+                  "key": "filename",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1cc2f131-9372-4ea1-a89d-f58a7e96e648",
+              "name": "The incoming request specified a `callback_url` and hence the request will return immediately with an empty response. The actual response will be sent to the provided `callback_url` via POST request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "save_to_default_model_directory",
+                      "value": "true"
+                    },
+                    {
+                      "key": "force_training",
+                      "value": "false"
+                    },
+                    {
+                      "key": "augmentation",
+                      "value": "50"
+                    },
+                    {
+                      "key": "num_threads",
+                      "value": "1"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "pipeline: []\n\npolicies: []\n\nintents:\n  - greet\n  - goodbye\n\nentities: []\nslots: {}\nactions: []\nforms: {}\ne2e_actions: []\n\nresponses:\n  utter_greet:\n  - text: \"Hey! How are you?\"\n\n  utter_goodbye:\n  - text: \"Bye\"\n\nsession_config:\n  session_expiration_time: 60\n  carry_over_slots_to_new_session: true\n\nnlu:\n- intent: greet\n  examples: |\n    - hey\n    - hello\n\n- intent: goodbye\n  examples: |\n    - bye\n    - goodbye\n\nrules:\n\n- rule: Say goodbye anytime the user says goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye\n\nstories:\n\n- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: goodbye\n  - action: utter_goodbye\n"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb46fc6b-03a3-4cfb-b863-b6579725ed96",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "save_to_default_model_directory",
+                      "value": "true"
+                    },
+                    {
+                      "key": "force_training",
+                      "value": "false"
+                    },
+                    {
+                      "key": "augmentation",
+                      "value": "50"
+                    },
+                    {
+                      "key": "num_threads",
+                      "value": "1"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "pipeline: []\n\npolicies: []\n\nintents:\n  - greet\n  - goodbye\n\nentities: []\nslots: {}\nactions: []\nforms: {}\ne2e_actions: []\n\nresponses:\n  utter_greet:\n  - text: \"Hey! How are you?\"\n\n  utter_goodbye:\n  - text: \"Bye\"\n\nsession_config:\n  session_expiration_time: 60\n  carry_over_slots_to_new_session: true\n\nnlu:\n- intent: greet\n  examples: |\n    - hey\n    - hello\n\n- intent: goodbye\n  examples: |\n    - bye\n    - goodbye\n\nrules:\n\n- rule: Say goodbye anytime the user says goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye\n\nstories:\n\n- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: goodbye\n  - action: utter_goodbye\n"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6af80333-b412-437f-90f6-7db07beb81f6",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "save_to_default_model_directory",
+                      "value": "true"
+                    },
+                    {
+                      "key": "force_training",
+                      "value": "false"
+                    },
+                    {
+                      "key": "augmentation",
+                      "value": "50"
+                    },
+                    {
+                      "key": "num_threads",
+                      "value": "1"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "pipeline: []\n\npolicies: []\n\nintents:\n  - greet\n  - goodbye\n\nentities: []\nslots: {}\nactions: []\nforms: {}\ne2e_actions: []\n\nresponses:\n  utter_greet:\n  - text: \"Hey! How are you?\"\n\n  utter_goodbye:\n  - text: \"Bye\"\n\nsession_config:\n  session_expiration_time: 60\n  carry_over_slots_to_new_session: true\n\nnlu:\n- intent: greet\n  examples: |\n    - hey\n    - hello\n\n- intent: goodbye\n  examples: |\n    - bye\n    - goodbye\n\nrules:\n\n- rule: Say goodbye anytime the user says goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye\n\nstories:\n\n- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: goodbye\n  - action: utter_goodbye\n"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2058c492-1f93-4c26-832e-2fc5ba9a5bc6",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "save_to_default_model_directory",
+                      "value": "true"
+                    },
+                    {
+                      "key": "force_training",
+                      "value": "false"
+                    },
+                    {
+                      "key": "augmentation",
+                      "value": "50"
+                    },
+                    {
+                      "key": "num_threads",
+                      "value": "1"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "pipeline: []\n\npolicies: []\n\nintents:\n  - greet\n  - goodbye\n\nentities: []\nslots: {}\nactions: []\nforms: {}\ne2e_actions: []\n\nresponses:\n  utter_greet:\n  - text: \"Hey! How are you?\"\n\n  utter_goodbye:\n  - text: \"Bye\"\n\nsession_config:\n  session_expiration_time: 60\n  carry_over_slots_to_new_session: true\n\nnlu:\n- intent: greet\n  examples: |\n    - hey\n    - hello\n\n- intent: goodbye\n  examples: |\n    - bye\n    - goodbye\n\nrules:\n\n- rule: Say goodbye anytime the user says goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye\n\nstories:\n\n- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: goodbye\n  - action: utter_goodbye\n"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "202e9dd3-de0f-414a-9511-65c46a416cf4",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "save_to_default_model_directory",
+                      "value": "true"
+                    },
+                    {
+                      "key": "force_training",
+                      "value": "false"
+                    },
+                    {
+                      "key": "augmentation",
+                      "value": "50"
+                    },
+                    {
+                      "key": "num_threads",
+                      "value": "1"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "pipeline: []\n\npolicies: []\n\nintents:\n  - greet\n  - goodbye\n\nentities: []\nslots: {}\nactions: []\nforms: {}\ne2e_actions: []\n\nresponses:\n  utter_greet:\n  - text: \"Hey! How are you?\"\n\n  utter_goodbye:\n  - text: \"Bye\"\n\nsession_config:\n  session_expiration_time: 60\n  carry_over_slots_to_new_session: true\n\nnlu:\n- intent: greet\n  examples: |\n    - hey\n    - hello\n\n- intent: goodbye\n  examples: |\n    - bye\n    - goodbye\n\nrules:\n\n- rule: Say goodbye anytime the user says goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye\n\nstories:\n\n- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: goodbye\n  - action: utter_goodbye\n"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f14f1bd-0eee-4cd0-82e3-e837bb4c06d1",
+          "name": "Evaluate stories",
+          "request": {
+            "name": "Evaluate stories",
+            "description": {
+              "content": "Evaluates one or multiple stories against the currently loaded Rasa model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "test",
+                "stories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "e2e",
+                  "value": "false",
+                  "description": "Perform an end-to-end evaluation on the posted stories."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/yml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "81b6e469-8c59-4755-b876-31c82d39ed87",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e2e",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_great\n  - action: utter_happy\n\n- story: sad path 1\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: affirm\n  - action: utter_happy\n\n- story: sad path 2\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: deny\n  - action: utter_goodbye\n\n- story: say goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"actions\": [\n    {\n      \"action\": \"utter_ask_howcanhelp\",\n      \"predicted\": \"utter_ask_howcanhelp\",\n      \"policy\": \"policy_0_MemoizationPolicy\",\n      \"confidence\": \"string\"\n    },\n    {\n      \"action\": \"utter_ask_howcanhelp\",\n      \"predicted\": \"utter_ask_howcanhelp\",\n      \"policy\": \"policy_0_MemoizationPolicy\",\n      \"confidence\": \"string\"\n    }\n  ],\n  \"is_end_to_end_evaluation\": true,\n  \"precision\": 1,\n  \"f1\": 0.9333333333333333,\n  \"accuracy\": 0.9,\n  \"in_training_data_fraction\": 0.8571428571428571,\n  \"report\": {\n    \"conversation_accuracy\": {\n      \"accuracy\": 0.19047619047619047,\n      \"correct\": 18,\n      \"with_warnings\": 1,\n      \"total\": 20\n    },\n    \"key_0\": {\n      \"intent_name\": \"string\",\n      \"classification_report\": {\n        \"greet\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100,\n          \"confused_with\": {\n            \"chitchat\": 3,\n            \"nlu_fallback\": 5\n          }\n        },\n        \"micro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"macro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"weightedq avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        }\n      }\n    },\n    \"key_1\": {\n      \"intent_name\": \"string\",\n      \"classification_report\": {\n        \"greet\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100,\n          \"confused_with\": {\n            \"chitchat\": 3,\n            \"nlu_fallback\": 5\n          }\n        },\n        \"micro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"macro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"weightedq avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2299d0f-cf73-4731-86ea-e4c0d6da74d5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e2e",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_great\n  - action: utter_happy\n\n- story: sad path 1\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: affirm\n  - action: utter_happy\n\n- story: sad path 2\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: deny\n  - action: utter_goodbye\n\n- story: say goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a247644e-0d8e-49b2-b8fa-b4e91dacbc69",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e2e",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_great\n  - action: utter_happy\n\n- story: sad path 1\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: affirm\n  - action: utter_happy\n\n- story: sad path 2\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: deny\n  - action: utter_goodbye\n\n- story: say goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c6a00c6-9caf-4f74-bb64-071c8f211df3",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e2e",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_great\n  - action: utter_happy\n\n- story: sad path 1\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: affirm\n  - action: utter_happy\n\n- story: sad path 2\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: deny\n  - action: utter_goodbye\n\n- story: say goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1546e273-2639-4150-b4e4-101c9d9c54ce",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e2e",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_great\n  - action: utter_happy\n\n- story: sad path 1\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: affirm\n  - action: utter_happy\n\n- story: sad path 2\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: deny\n  - action: utter_goodbye\n\n- story: say goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye"
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd0d707e-5b4c-4bff-97ce-bbc088427fa8",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e2e",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "- story: happy path\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_great\n  - action: utter_happy\n\n- story: sad path 1\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: affirm\n  - action: utter_happy\n\n- story: sad path 2\n  steps:\n  - intent: greet\n  - action: utter_greet\n  - intent: mood_unhappy\n  - action: utter_cheer_up\n  - action: utter_did_that_help\n  - intent: deny\n  - action: utter_goodbye\n\n- story: say goodbye\n  steps:\n  - intent: goodbye\n  - action: utter_goodbye"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7b193e7-b693-4568-bfdb-171702976955",
+          "name": "Perform an intent evaluation",
+          "request": {
+            "name": "Perform an intent evaluation",
+            "description": {
+              "content": "Evaluates NLU model against a model or using cross-validation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "test",
+                "intents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "model",
+                  "value": "<string>",
+                  "description": "Model that should be used for evaluation. If the parameter is set, the model will be fetched with the currently loaded configuration setup. However, the currently loaded model will not be updated. The state of the server will not change. If the parameter is not set, the currently loaded model will be used for the evaluation."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback_url",
+                  "value": "None",
+                  "description": "If specified the call will return immediately with an empty response and status code 204. The actual result or any errors will be sent to the given callback URL as the body of a post request."
+                },
+                {
+                  "disabled": false,
+                  "key": "cross_validation_folds",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"common_examples\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a761030-f658-4bb0-be71-c24d2a2a90de",
+              "name": "NLU evaluation result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "rasa-model.tar.gz"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    },
+                    {
+                      "key": "cross_validation_folds",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rasa_nlu_data\": {\n    \"common_examples\": [\n      {\n        \"text\": \"hey\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"dear sir\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place to eat\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place in the north of town\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 36,\n            \"value\": \"north\",\n            \"entity\": \"location\"\n          }\n        ]\n      },\n      {\n        \"text\": \"show me a mexican place in the centre\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 37,\n            \"value\": \"centre\",\n            \"entity\": \"location\"\n          },\n          {\n            \"start\": 10,\n            \"end\": 17,\n            \"value\": \"mexican\",\n            \"entity\": \"cuisine\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"intent_evaluation\": {\n    \"report\": {\n      \"greet\": {\n        \"precision\": 0.123,\n        \"recall\": 0.456,\n        \"f1-score\": 0.12,\n        \"support\": 100,\n        \"confused_with\": {\n          \"chitchat\": 3,\n          \"nlu_fallback\": 5\n        }\n      },\n      \"micro avg\": {\n        \"precision\": 0.123,\n        \"recall\": 0.456,\n        \"f1-score\": 0.12,\n        \"support\": 100\n      },\n      \"macro avg\": {\n        \"precision\": 0.123,\n        \"recall\": 0.456,\n        \"f1-score\": 0.12,\n        \"support\": 100\n      },\n      \"weightedq avg\": {\n        \"precision\": 0.123,\n        \"recall\": 0.456,\n        \"f1-score\": 0.12,\n        \"support\": 100\n      }\n    },\n    \"accuracy\": 0.19047619047619047,\n    \"f1_score\": 0.06095238095238095,\n    \"precision\": 0.036281179138321996,\n    \"predictions\": [\n      {\n        \"intent\": \"greet\",\n        \"predicted\": \"greet\",\n        \"text\": \"hey\",\n        \"confidence\": 0.9973567\n      },\n      {\n        \"intent\": \"greet\",\n        \"predicted\": \"greet\",\n        \"text\": \"hey\",\n        \"confidence\": 0.9973567\n      }\n    ],\n    \"errors\": [\n      {\n        \"text\": \"are you alright?\",\n        \"intent_response_key_target\": \"string\",\n        \"intent_response_key_prediction\": {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        }\n      },\n      {\n        \"text\": \"are you alright?\",\n        \"intent_response_key_target\": \"string\",\n        \"intent_response_key_prediction\": {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        }\n      }\n    ]\n  },\n  \"response_selection_evaluation\": {\n    \"report\": {\n      \"greet\": {\n        \"precision\": 0.123,\n        \"recall\": 0.456,\n        \"f1-score\": 0.12,\n        \"support\": 100,\n        \"confused_with\": {\n          \"chitchat\": 3,\n          \"nlu_fallback\": 5\n        }\n      },\n      \"micro avg\": {\n        \"precision\": 0.123,\n        \"recall\": 0.456,\n        \"f1-score\": 0.12,\n        \"support\": 100\n      },\n      \"macro avg\": {\n        \"precision\": 0.123,\n        \"recall\": 0.456,\n        \"f1-score\": 0.12,\n        \"support\": 100\n      },\n      \"weightedq avg\": {\n        \"precision\": 0.123,\n        \"recall\": 0.456,\n        \"f1-score\": 0.12,\n        \"support\": 100\n      }\n    },\n    \"accuracy\": 0.19047619047619047,\n    \"f1_score\": 0.06095238095238095,\n    \"precision\": 0.036281179138321996,\n    \"predictions\": [\n      {\n        \"intent\": \"greet\",\n        \"predicted\": \"greet\",\n        \"text\": \"hey\",\n        \"confidence\": 0.9973567\n      },\n      {\n        \"intent\": \"greet\",\n        \"predicted\": \"greet\",\n        \"text\": \"hey\",\n        \"confidence\": 0.9973567\n      }\n    ],\n    \"errors\": [\n      {\n        \"text\": \"are you alright?\",\n        \"intent_response_key_target\": \"string\",\n        \"intent_response_key_prediction\": {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        }\n      },\n      {\n        \"text\": \"are you alright?\",\n        \"intent_response_key_target\": \"string\",\n        \"intent_response_key_prediction\": {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        }\n      }\n    ]\n  },\n  \"entity_evaluation\": {\n    \"key_0\": {\n      \"report\": {\n        \"greet\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100,\n          \"confused_with\": {\n            \"chitchat\": 3,\n            \"nlu_fallback\": 5\n          }\n        },\n        \"micro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"macro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"weightedq avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        }\n      },\n      \"accuracy\": 0.19047619047619047,\n      \"f1_score\": 0.06095238095238095,\n      \"precision\": 0.036281179138321996,\n      \"predictions\": [\n        {\n          \"intent\": \"greet\",\n          \"predicted\": \"greet\",\n          \"text\": \"hey\",\n          \"confidence\": 0.9973567\n        },\n        {\n          \"intent\": \"greet\",\n          \"predicted\": \"greet\",\n          \"text\": \"hey\",\n          \"confidence\": 0.9973567\n        }\n      ],\n      \"errors\": [\n        {\n          \"text\": \"are you alright?\",\n          \"intent_response_key_target\": \"string\",\n          \"intent_response_key_prediction\": {\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"text\": \"are you alright?\",\n          \"intent_response_key_target\": \"string\",\n          \"intent_response_key_prediction\": {\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"key_1\": {\n      \"report\": {\n        \"greet\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100,\n          \"confused_with\": {\n            \"chitchat\": 3,\n            \"nlu_fallback\": 5\n          }\n        },\n        \"micro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"macro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"weightedq avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        }\n      },\n      \"accuracy\": 0.19047619047619047,\n      \"f1_score\": 0.06095238095238095,\n      \"precision\": 0.036281179138321996,\n      \"predictions\": [\n        {\n          \"intent\": \"greet\",\n          \"predicted\": \"greet\",\n          \"text\": \"hey\",\n          \"confidence\": 0.9973567\n        },\n        {\n          \"intent\": \"greet\",\n          \"predicted\": \"greet\",\n          \"text\": \"hey\",\n          \"confidence\": 0.9973567\n        }\n      ],\n      \"errors\": [\n        {\n          \"text\": \"are you alright?\",\n          \"intent_response_key_target\": \"string\",\n          \"intent_response_key_prediction\": {\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"text\": \"are you alright?\",\n          \"intent_response_key_target\": \"string\",\n          \"intent_response_key_prediction\": {\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"key_2\": {\n      \"report\": {\n        \"greet\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100,\n          \"confused_with\": {\n            \"chitchat\": 3,\n            \"nlu_fallback\": 5\n          }\n        },\n        \"micro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"macro avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        },\n        \"weightedq avg\": {\n          \"precision\": 0.123,\n          \"recall\": 0.456,\n          \"f1-score\": 0.12,\n          \"support\": 100\n        }\n      },\n      \"accuracy\": 0.19047619047619047,\n      \"f1_score\": 0.06095238095238095,\n      \"precision\": 0.036281179138321996,\n      \"predictions\": [\n        {\n          \"intent\": \"greet\",\n          \"predicted\": \"greet\",\n          \"text\": \"hey\",\n          \"confidence\": 0.9973567\n        },\n        {\n          \"intent\": \"greet\",\n          \"predicted\": \"greet\",\n          \"text\": \"hey\",\n          \"confidence\": 0.9973567\n        }\n      ],\n      \"errors\": [\n        {\n          \"text\": \"are you alright?\",\n          \"intent_response_key_target\": \"string\",\n          \"intent_response_key_prediction\": {\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"text\": \"are you alright?\",\n          \"intent_response_key_target\": \"string\",\n          \"intent_response_key_prediction\": {\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d77af5a3-7627-4772-bf0e-d2ba5fa6f37c",
+              "name": "The incoming request specified a `callback_url` and hence the request will return immediately with an empty response. The actual response will be sent to the provided `callback_url` via POST request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "rasa-model.tar.gz"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    },
+                    {
+                      "key": "cross_validation_folds",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rasa_nlu_data\": {\n    \"common_examples\": [\n      {\n        \"text\": \"hey\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"dear sir\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place to eat\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place in the north of town\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 36,\n            \"value\": \"north\",\n            \"entity\": \"location\"\n          }\n        ]\n      },\n      {\n        \"text\": \"show me a mexican place in the centre\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 37,\n            \"value\": \"centre\",\n            \"entity\": \"location\"\n          },\n          {\n            \"start\": 10,\n            \"end\": 17,\n            \"value\": \"mexican\",\n            \"entity\": \"cuisine\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9cfa0f3c-d0b7-4e75-b79e-450553fbf27a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "rasa-model.tar.gz"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    },
+                    {
+                      "key": "cross_validation_folds",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rasa_nlu_data\": {\n    \"common_examples\": [\n      {\n        \"text\": \"hey\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"dear sir\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place to eat\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place in the north of town\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 36,\n            \"value\": \"north\",\n            \"entity\": \"location\"\n          }\n        ]\n      },\n      {\n        \"text\": \"show me a mexican place in the centre\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 37,\n            \"value\": \"centre\",\n            \"entity\": \"location\"\n          },\n          {\n            \"start\": 10,\n            \"end\": 17,\n            \"value\": \"mexican\",\n            \"entity\": \"cuisine\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f0e4615-5d13-4070-8ceb-7faae090b140",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "rasa-model.tar.gz"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    },
+                    {
+                      "key": "cross_validation_folds",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rasa_nlu_data\": {\n    \"common_examples\": [\n      {\n        \"text\": \"hey\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"dear sir\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place to eat\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place in the north of town\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 36,\n            \"value\": \"north\",\n            \"entity\": \"location\"\n          }\n        ]\n      },\n      {\n        \"text\": \"show me a mexican place in the centre\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 37,\n            \"value\": \"centre\",\n            \"entity\": \"location\"\n          },\n          {\n            \"start\": 10,\n            \"end\": 17,\n            \"value\": \"mexican\",\n            \"entity\": \"cuisine\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38f26d77-fab3-414d-aa95-4bf72ff0a5ca",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "rasa-model.tar.gz"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    },
+                    {
+                      "key": "cross_validation_folds",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rasa_nlu_data\": {\n    \"common_examples\": [\n      {\n        \"text\": \"hey\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"dear sir\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place to eat\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place in the north of town\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 36,\n            \"value\": \"north\",\n            \"entity\": \"location\"\n          }\n        ]\n      },\n      {\n        \"text\": \"show me a mexican place in the centre\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 37,\n            \"value\": \"centre\",\n            \"entity\": \"location\"\n          },\n          {\n            \"start\": 10,\n            \"end\": 17,\n            \"value\": \"mexican\",\n            \"entity\": \"cuisine\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c807f452-0c69-442b-bc28-6f22f80cdfd9",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "rasa-model.tar.gz"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    },
+                    {
+                      "key": "cross_validation_folds",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rasa_nlu_data\": {\n    \"common_examples\": [\n      {\n        \"text\": \"hey\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"dear sir\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place to eat\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place in the north of town\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 36,\n            \"value\": \"north\",\n            \"entity\": \"location\"\n          }\n        ]\n      },\n      {\n        \"text\": \"show me a mexican place in the centre\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 37,\n            \"value\": \"centre\",\n            \"entity\": \"location\"\n          },\n          {\n            \"start\": 10,\n            \"end\": 17,\n            \"value\": \"mexican\",\n            \"entity\": \"cuisine\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c47a769-e35c-47dd-94a8-dfcdc2e019c8",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "test",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "rasa-model.tar.gz"
+                    },
+                    {
+                      "key": "callback_url",
+                      "value": "https://example.com/rasa_evaluations"
+                    },
+                    {
+                      "key": "cross_validation_folds",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rasa_nlu_data\": {\n    \"common_examples\": [\n      {\n        \"text\": \"hey\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"dear sir\",\n        \"intent\": \"greet\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place to eat\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": []\n      },\n      {\n        \"text\": \"i'm looking for a place in the north of town\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 36,\n            \"value\": \"north\",\n            \"entity\": \"location\"\n          }\n        ]\n      },\n      {\n        \"text\": \"show me a mexican place in the centre\",\n        \"intent\": \"restaurant_search\",\n        \"entities\": [\n          {\n            \"start\": 31,\n            \"end\": 37,\n            \"value\": \"centre\",\n            \"entity\": \"location\"\n          },\n          {\n            \"start\": 10,\n            \"end\": 17,\n            \"value\": \"mexican\",\n            \"entity\": \"cuisine\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "deebfd75-513f-4023-a32b-7c40813e2a83",
+          "name": "Predict an action on a temporary state",
+          "request": {
+            "name": "Predict an action on a temporary state",
+            "description": {
+              "content": "Predicts the next action on the tracker state as it is posted to this endpoint. Rasa will create a temporary tracker from the provided events and will use it to predict an action. No messages will be sent and no action will be run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "predict"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_events",
+                  "value": "AFTER_RESTART",
+                  "description": "Specify which events of the tracker the response should contain.\n* `ALL` - every logged event.\n* `APPLIED` - only events that contribute to the trackers state. This excludes reverted utterances and actions that got undone.\n* `AFTER_RESTART` -  all events since the last `restarted` event.\n  This includes utterances that got reverted and actions that got undone.\n\n* `NONE` - no events."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {},\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"<string>\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {},\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"<string>\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1aa323d5-57f5-4fb5-843c-977325eb5024",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scores\": [\n    {\n      \"action\": \"utter_greet\",\n      \"score\": 1\n    },\n    {\n      \"action\": \"utter_greet\",\n      \"score\": 1\n    }\n  ],\n  \"policy\": \"policy_2_TEDPolicy\",\n  \"tracker\": {\n    \"conversation_id\": \"default\",\n    \"slots\": [\n      {\n        \"slot_name\": \"slot_value\"\n      },\n      {\n        \"slot_name\": \"slot_value\"\n      }\n    ],\n    \"latest_message\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"start\": 1521,\n          \"end\": 7922,\n          \"value\": \"string\",\n          \"entity\": \"string\",\n          \"confidence\": 8410.696245781111\n        },\n        {\n          \"start\": 4457,\n          \"end\": 6292,\n          \"value\": \"string\",\n          \"entity\": \"string\",\n          \"confidence\": 585.0490313109258\n        }\n      ],\n      \"intent\": {\n        \"confidence\": 0.6323,\n        \"name\": \"greet\"\n      },\n      \"intent_ranking\": [\n        {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        },\n        {\n          \"confidence\": 0.6323,\n          \"name\": \"greet\"\n        }\n      ]\n    },\n    \"latest_event_time\": 1537645578.314389,\n    \"followup_action\": \"string\",\n    \"paused\": false,\n    \"events\": [\n      {\n        \"event\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"input_channel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"message_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parse_data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"event\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"text\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"input_channel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"message_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parse_data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"latest_input_channel\": \"rest\",\n    \"latest_action_name\": \"action_listen\",\n    \"latest_action\": {\n      \"action_name\": \"string\",\n      \"action_text\": \"string\"\n    },\n    \"active_loop\": {\n      \"name\": \"restaurant_form\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9164c09f-f56e-424b-a153-0bda30e5b4ea",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "765b7de8-5bf5-4edd-858c-3c473162dbdf",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa0daca0-7bca-4446-b26a-359fcb977ae8",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fac2935d-0899-4908-a4ce-f79b48ef5ed3",
+              "name": "The request conflicts with the currently loaded model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"Conflict\",\n  \"message\": \"The request conflicts with the currently loaded model.\",\n  \"code\": 409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2747ade0-452f-4efe-a161-fdb30447ed5b",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_events",
+                      "value": "AFTER_RESTART"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  {\n    \"event\": \"<string>\",\n    \"timestamp\": \"<integer>\",\n    \"metadata\": {\n      \"arbitrary_metadata_key\": \"some string\",\n      \"more_metadata\": 1\n    },\n    \"text\": \"<string>\",\n    \"input_channel\": \"<string>\",\n    \"message_id\": \"<string>\",\n    \"parse_data\": {\n      \"text\": \"Hello!\",\n      \"entities\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"intent\": {\n        \"confidence\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"intent_ranking\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51216257-76b3-4396-b60f-86bf7a1490b3",
+          "name": "Parse a message using the Rasa model",
+          "request": {
+            "name": "Parse a message using the Rasa model",
+            "description": {
+              "content": "Predicts the intent and entities of the message posted to this endpoint. No messages will be stored to a conversation and no action will be run. This will just retrieve the NLU parse results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "parse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "emulation_mode",
+                  "value": "<string>",
+                  "description": "Specify the emulation mode to use. Emulation mode transforms the response JSON to the format expected by the service specified as the emulation_mode. Requests must still be sent in the regular Rasa format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"message_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1935da4b-d618-47d5-9c67-9cae9bba1c0b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "parse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "emulation_mode",
+                      "value": "LUIS"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, I am Rasa!\",\n  \"message_id\": \"b2831e73-1407-4ba0-a861-0f30a42a2a5a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"text\": \"Hello!\",\n  \"entities\": [\n    {\n      \"start\": 2772,\n      \"end\": 8640,\n      \"value\": \"string\",\n      \"entity\": \"string\",\n      \"confidence\": 1223.885902248273\n    },\n    {\n      \"start\": 5596,\n      \"end\": 2962,\n      \"value\": \"string\",\n      \"entity\": \"string\",\n      \"confidence\": 1034.287955625144\n    }\n  ],\n  \"intent\": {\n    \"confidence\": 0.6323,\n    \"name\": \"greet\"\n  },\n  \"intent_ranking\": [\n    {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    },\n    {\n      \"confidence\": 0.6323,\n      \"name\": \"greet\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "625d28d3-64ea-434f-9de4-c7b5ac92ef89",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "parse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "emulation_mode",
+                      "value": "LUIS"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, I am Rasa!\",\n  \"message_id\": \"b2831e73-1407-4ba0-a861-0f30a42a2a5a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b05f96f9-1b89-44a3-a4c4-327142cebc95",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "parse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "emulation_mode",
+                      "value": "LUIS"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, I am Rasa!\",\n  \"message_id\": \"b2831e73-1407-4ba0-a861-0f30a42a2a5a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d462f03-ca83-48fe-be71-64887dc4c368",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "parse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "emulation_mode",
+                      "value": "LUIS"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, I am Rasa!\",\n  \"message_id\": \"b2831e73-1407-4ba0-a861-0f30a42a2a5a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fc50794-33fe-44e6-9c21-7a8431fe8e43",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "parse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "emulation_mode",
+                      "value": "LUIS"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, I am Rasa!\",\n  \"message_id\": \"b2831e73-1407-4ba0-a861-0f30a42a2a5a\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29aedb18-9426-4461-b89b-3a57e50812a0",
+          "name": "Replace the currently loaded model",
+          "request": {
+            "name": "Replace the currently loaded model",
+            "description": {
+              "content": "Updates the currently loaded model. First, tries to load the model from the local (note: local to Rasa server) storage system. Secondly, tries to load the model from the provided model server configuration. Last, tries to load the model from the provided remote storage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model_file\": \"<string>\",\n  \"model_server\": {\n    \"url\": \"<string>\",\n    \"params\": \"<object>\",\n    \"headers\": \"<object>\",\n    \"basic_auth\": \"<object>\",\n    \"token\": \"<string>\",\n    \"token_name\": \"<string>\",\n    \"wait_time_between_pulls\": \"<integer>\"\n  },\n  \"remote_storage\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "27e8a1bf-2f9e-4e77-aa78-c27458eeefb7",
+              "name": "Model was successfully replaced.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model_file\": \"/absolute-path-to-models-directory/models/20190512.tar.gz\",\n  \"model_server\": {\n    \"url\": \"<string>\",\n    \"params\": \"<object>\",\n    \"headers\": \"<object>\",\n    \"basic_auth\": \"<object>\",\n    \"token\": \"<string>\",\n    \"token_name\": \"<string>\",\n    \"wait_time_between_pulls\": \"<integer>\"\n  },\n  \"remote_storage\": \"aws\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9aaac88b-9eb1-4a15-beda-04df70afe583",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model_file\": \"/absolute-path-to-models-directory/models/20190512.tar.gz\",\n  \"model_server\": {\n    \"url\": \"<string>\",\n    \"params\": \"<object>\",\n    \"headers\": \"<object>\",\n    \"basic_auth\": \"<object>\",\n    \"token\": \"<string>\",\n    \"token_name\": \"<string>\",\n    \"wait_time_between_pulls\": \"<integer>\"\n  },\n  \"remote_storage\": \"aws\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"BadRequest\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "390c0ece-b3d8-4da5-9bc0-1bca9fd52980",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model_file\": \"/absolute-path-to-models-directory/models/20190512.tar.gz\",\n  \"model_server\": {\n    \"url\": \"<string>\",\n    \"params\": \"<object>\",\n    \"headers\": \"<object>\",\n    \"basic_auth\": \"<object>\",\n    \"token\": \"<string>\",\n    \"token_name\": \"<string>\",\n    \"wait_time_between_pulls\": \"<integer>\"\n  },\n  \"remote_storage\": \"aws\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31b57bca-fde8-4b3f-afde-62a1bba5d9b5",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model_file\": \"/absolute-path-to-models-directory/models/20190512.tar.gz\",\n  \"model_server\": {\n    \"url\": \"<string>\",\n    \"params\": \"<object>\",\n    \"headers\": \"<object>\",\n    \"basic_auth\": \"<object>\",\n    \"token\": \"<string>\",\n    \"token_name\": \"<string>\",\n    \"wait_time_between_pulls\": \"<integer>\"\n  },\n  \"remote_storage\": \"aws\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ad5462a-1bc9-465b-9a54-4d6088c88dbe",
+              "name": "An unexpected error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model_file\": \"/absolute-path-to-models-directory/models/20190512.tar.gz\",\n  \"model_server\": {\n    \"url\": \"<string>\",\n    \"params\": \"<object>\",\n    \"headers\": \"<object>\",\n    \"basic_auth\": \"<object>\",\n    \"token\": \"<string>\",\n    \"token_name\": \"<string>\",\n    \"wait_time_between_pulls\": \"<integer>\"\n  },\n  \"remote_storage\": \"aws\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"ServerError\",\n  \"message\": \"An unexpected error occurred.\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57e55317-95d8-431a-ba9d-8d8e0c486e90",
+          "name": "Unload the trained model",
+          "request": {
+            "name": "Unload the trained model",
+            "description": {
+              "content": "Unloads the currently loaded trained model from the server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "25857f3f-922e-4755-8af3-b445b9312a3e",
+              "name": "Model was sucessfully unloaded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e482b075-9f0e-48e3-9e21-47bb403b65fd",
+              "name": "User is not authenticated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthenticated\",\n  \"message\": \"User is not authenticated to access resource.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb62ccc9-1f60-49f8-8215-d00ceac69593",
+              "name": "User has insufficient permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"1.0.0\",\n  \"status\": \"failure\",\n  \"reason\": \"NotAuthorized\",\n  \"message\": \"User has insufficient permission to access resource.\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:5055/webhook",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "39a548a2-99c0-434b-bbec-74578374c2e8",
+    "name": "Rasa SDK - Action Server Endpoint Domain Model API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API of the action server which is used by Rasa to execute custom actions.",
+      "type": "text/plain"
+    }
+  }
+}
