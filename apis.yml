@@ -1,15 +1,12 @@
 aid: rasa
 name: Rasa
-description: >-
-  Rasa is an open-core conversational AI framework for enterprises, built by Rasa
-  Technologies GmbH, that natively leverages generative AI through CALM
-  (Conversational AI with Language Models) to build reliable text and voice
-  assistants. Rasa Pro is the pro-code framework (with Flows, custom actions,
-  channel connectors, multi-LLM routing, observability and Kubernetes
-  deployment); Rasa Studio is the companion no-code UI; and Rasa Open Source
-  provides the underlying NLU and dialogue-management framework. The self-hosted
-  runtime exposes an HTTP API for managing conversation trackers and training,
-  testing and loading models, plus a Python SDK action server for custom actions.
+description: Rasa is an open-core conversational AI framework for enterprises, built by Rasa Technologies
+  GmbH, that natively leverages generative AI through CALM (Conversational AI with Language Models) to
+  build reliable text and voice assistants. Rasa Pro is the pro-code framework (with Flows, custom actions,
+  channel connectors, multi-LLM routing, observability and Kubernetes deployment); Rasa Studio is the
+  companion no-code UI; and Rasa Open Source provides the underlying NLU and dialogue-management framework.
+  The self-hosted runtime exposes an HTTP API for managing conversation trackers and training, testing
+  and loading models, plus a Python SDK action server for custom actions.
 url: https://raw.githubusercontent.com/api-evangelist/rasa/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -49,7 +46,7 @@ accessModel:
 image: https://rasa.com/favicon.ico
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-09-16'
 tags:
 - Company
 - Artificial Intelligence
@@ -104,9 +101,9 @@ apis:
   - type: Documentation
     url: https://rasa.com/docs/reference/overview/
 - aid: rasa:rasa-rasa-sdk-action-server-endpoint-api
-  name: Rasa Rasa SDK Action Server Endpoint API
-  description: >-
-    The Rasa SDK Action Server Endpoint API from Rasa — 1 operation(s) for rasa sdk action server endpoint.
+  name: Rasa SDK Action Server Endpoint API
+  description: The Rasa SDK Action Server Endpoint API from Rasa — 1 operation(s) for rasa sdk action
+    server endpoint.
   humanURL: https://rasa.com/docs/reference/overview/
   baseURL: http://localhost:5005
   tags:
@@ -178,7 +175,10 @@ common:
   url: cli/rasa-cli.yml
 - type: X-MCPServerCandidate
   url: mcp/rasa-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: LLMsTxt
