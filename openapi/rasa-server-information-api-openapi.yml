@@ -1,11 +1,11 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Rasa SDK - Action Server Endpoint Domain Server Information API
-  version: 0.0.0
-  description: API of the action server which is used by Rasa to execute custom actions.
+  title: Rasa - Server Endpoints Server Information API
+  version: 1.0.0
+  description: The Rasa server provides endpoints to retrieve trackers of conversations as well as endpoints to modify them. Additionally, endpoints for training and testing models are provided.
 servers:
-- url: http://localhost:5055/webhook
-  description: Local development action server
+- url: http://localhost:5005
+  description: Local development server
 tags:
 - name: Server Information
 paths:
@@ -86,6 +86,33 @@ paths:
         409:
           $ref: '#/components/responses/409Conflict'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Rasa version
+        status:
+          type: string
+          enum:
+          - failure
+          description: Status of the requested action
+        message:
+          type: string
+          description: Error message
+        reason:
+          type: string
+          description: Error category
+        details:
+          type: object
+          description: Additional error information
+        help:
+          type: string
+          description: Optional URL to additonal material
+        code:
+          type: number
+          description: HTTP status code
   responses:
     409Conflict:
       description: The request conflicts with the currently loaded model.
@@ -123,30 +150,16 @@ components:
             reason: NotAuthenticated
             message: User is not authenticated to access resource.
             code: 401
-  schemas:
-    Error:
-      type: object
-      properties:
-        version:
-          type: string
-          description: Rasa version
-        status:
-          type: string
-          enum:
-          - failure
-          description: Status of the requested action
-        message:
-          type: string
-          description: Error message
-        reason:
-          type: string
-          description: Error category
-        details:
-          type: object
-          description: Additional error information
-        help:
-          type: string
-          description: Optional URL to additonal material
-        code:
-          type: number
-          description: HTTP status code
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: query
+      name: token
+      description: 'A plaintext token to secure your server, specified at startup in the argument `--auth-token thisismysecret`
+
+        '
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "A JWT token that is signed using the JWT secret specified at startup in the argument `--jwt-secret thisismysecret`,\nusing the `HS256` algorithm.\n\nThe token's payload must contain an object under the `user` key,\nwhich in turn must contain the `username` and `role` attributes.\nThe following is an example payload for a JWT token:\n\n```json\n{\n    \"user\": {\n        \"username\": \"<sender_id>\",\n        \"role\": \"user\"\n    }\n}\n```\n\nIf the `role` is `admin`, all endpoints are accessible.\nIf the `role` is `user`, endpoints with a `sender_id` parameter are only accessible\nif the `sender_id` matches the payload's `username` property.\n"

@@ -1,0 +1,36 @@
+# Front Door AI Index — rasa — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: rasa
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: rasa.com
+  final_host: rasa.com
+  ownership: own
+  owner: rasa
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 98
+  host_score: 98
+  density: 42.83
+  words: 2288
+  tiers:
+    agentic: 41
+    core: 56
+    model: 1
+  ambiguous: 40
+  top_terms:
+    AI: 48
+    agent: 39
+    AI agent: 14
+    conversational AI: 12
+    LLMs: 7
+    AI assistant: 5
+    prompts: 4
+    agentic: 2
+    chatbot: 2
+    MCP: 1
+    OpenAI: 1
+    automation: 1

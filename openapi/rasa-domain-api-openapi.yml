@@ -1,11 +1,11 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Rasa SDK - Action Server Endpoint Domain API
-  version: 0.0.0
-  description: API of the action server which is used by Rasa to execute custom actions.
+  title: Rasa - Server Endpoints Domain API
+  version: 1.0.0
+  description: The Rasa server provides endpoints to retrieve trackers of conversations as well as endpoints to modify them. Additionally, endpoints for training and testing models are provided.
 servers:
-- url: http://localhost:5055/webhook
-  description: Local development action server
+- url: http://localhost:5005
+  description: Local development server
 tags:
 - name: Domain
 paths:
@@ -38,54 +38,6 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 components:
-  responses:
-    406InvalidHeader:
-      description: Invalid header provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: InvalidHeader
-            message: Invalid header was provided with the request.
-            code: 406
-    500ServerError:
-      description: An unexpected error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: ServerError
-            message: An unexpected error occurred.
-            code: 500
-    403NotAuthorized:
-      description: User has insufficient permission.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: NotAuthorized
-            message: User has insufficient permission to access resource.
-            code: 403
-    401NotAuthenticated:
-      description: User is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: NotAuthenticated
-            message: User is not authenticated to access resource.
-            code: 401
   schemas:
     Domain:
       type: object
@@ -131,14 +83,23 @@ components:
           - action_greet
           - action_goodbye
           - action_listen
+    TemplateDescription:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Template text
+      required:
+      - text
     SlotDescription:
       type: object
       properties:
         auto_fill:
           type: boolean
         initial_value:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         type:
           type: string
         values:
@@ -148,6 +109,13 @@ components:
       required:
       - type
       - auto_fill
+    IntentDescription:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          use_entities:
+            type: boolean
     Error:
       type: object
       properties:
@@ -174,18 +142,64 @@ components:
         code:
           type: number
           description: HTTP status code
-    TemplateDescription:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Template text
-      required:
-      - text
-    IntentDescription:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          use_entities:
-            type: boolean
+  responses:
+    401NotAuthenticated:
+      description: User is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthenticated
+            message: User is not authenticated to access resource.
+            code: 401
+    500ServerError:
+      description: An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: ServerError
+            message: An unexpected error occurred.
+            code: 500
+    403NotAuthorized:
+      description: User has insufficient permission.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthorized
+            message: User has insufficient permission to access resource.
+            code: 403
+    406InvalidHeader:
+      description: Invalid header provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: InvalidHeader
+            message: Invalid header was provided with the request.
+            code: 406
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: query
+      name: token
+      description: 'A plaintext token to secure your server, specified at startup in the argument `--auth-token thisismysecret`
+
+        '
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "A JWT token that is signed using the JWT secret specified at startup in the argument `--jwt-secret thisismysecret`,\nusing the `HS256` algorithm.\n\nThe token's payload must contain an object under the `user` key,\nwhich in turn must contain the `username` and `role` attributes.\nThe following is an example payload for a JWT token:\n\n```json\n{\n    \"user\": {\n        \"username\": \"<sender_id>\",\n        \"role\": \"user\"\n    }\n}\n```\n\nIf the `role` is `admin`, all endpoints are accessible.\nIf the `role` is `user`, endpoints with a `sender_id` parameter are only accessible\nif the `sender_id` matches the payload's `username` property.\n"

@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Rasa SDK - Action Server Endpoint Domain Rasa SDK Action Server Endpoint API
+  title: Rasa SDK - Action Server Endpoint Rasa SDK Action Server…
   version: 0.0.0
   description: API of the action server which is used by Rasa to execute custom actions.
 servers:
@@ -69,11 +69,6 @@ paths:
       - Rasa SDK Action Server Endpoint
 components:
   schemas:
-    Response:
-      oneOf:
-      - $ref: '#/components/schemas/TextResponse'
-      - $ref: '#/components/schemas/TemplateResponse'
-      - $ref: '#/components/schemas/ButtonResponse'
     ButtonResponse:
       description: Text with buttons which should be sent to the user.
       type: object
@@ -85,18 +80,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Button'
-    TemplateResponse:
-      description: Response template the bot should utter.
-      type: object
-      properties:
-        template:
-          description: Name of the template
-          type: string
-      additionalProperties:
-        description: Keyword argument to fill the template
-        type: string
-      required:
-      - template
     TextResponse:
       description: Text which the bot should utter.
       type: object
@@ -116,3 +99,20 @@ components:
         payload:
           type: string
           description: Payload which is sent if the button is pressed.
+    Response:
+      oneOf:
+      - $ref: '#/components/schemas/TextResponse'
+      - $ref: '#/components/schemas/TemplateResponse'
+      - $ref: '#/components/schemas/ButtonResponse'
+    TemplateResponse:
+      description: Response template the bot should utter.
+      type: object
+      properties:
+        template:
+          description: Name of the template
+          type: string
+      additionalProperties:
+        description: Keyword argument to fill the template
+        type: string
+      required:
+      - template

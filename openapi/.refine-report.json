@@ -1,22 +1,36 @@
 {
   "provider": "rasa",
   "sources": [
-    "rasa-domain-api-openapi.yml",
-    "rasa-model-api-openapi.yml",
-    "rasa-rasa-sdk-action-server-endpoint-api-openapi.yml",
-    "rasa-server-information-api-openapi.yml",
-    "rasa-tracker-api-openapi.yml"
+    "_original/rasa-action-server-openapi.yml",
+    "_original/rasa-http-api-openapi.yml"
   ],
   "outputs": [
+    "rasa-rasa-sdk-action-server-endpoint-api-openapi.yml",
     "rasa-domain-api-openapi.yml",
     "rasa-model-api-openapi.yml",
-    "rasa-rasa-sdk-action-server-endpoint-api-openapi.yml",
     "rasa-server-information-api-openapi.yml",
     "rasa-tracker-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "rasa-action-server-openapi.yml: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "rasa-action-server-openapi.yml: tagged paths POST / -> Rasa SDK Action Server Endpoint",
+    "rasa-action-server-openapi.yml: declared missing tag: Rasa SDK Action Server Endpoint",
+    "rasa-http-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "rasa-http-api-openapi.yml: declared missing tag: Domain",
+    "rasa-http-api-openapi.yml: declared missing tag: Model",
+    "rasa-http-api-openapi.yml: declared missing tag: Server Information",
+    "rasa-http-api-openapi.yml: declared missing tag: Tracker",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "rasa-domain-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rasa-model-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rasa-rasa-sdk-action-server-endpoint-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rasa-server-information-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rasa-tracker-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
