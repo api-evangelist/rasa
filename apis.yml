@@ -55,7 +55,7 @@ tags:
 - Voice Assistant
 - NLU
 - LLM
-- Machine-Learning
+- Machine Learning
 - Agents
 tags_raw:
 - Company
@@ -67,6 +67,7 @@ tags_raw:
 - LLM
 - Machine Learning
 - Agents
+- Machine-Learning
 apis:
 - aid: rasa:rasa-domain-api
   name: Rasa Domain API

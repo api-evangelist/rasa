@@ -86,6 +86,43 @@ paths:
         409:
           $ref: '#/components/responses/409Conflict'
 components:
+  responses:
+    403NotAuthorized:
+      description: User has insufficient permission.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthorized
+            message: User has insufficient permission to access resource.
+            code: 403
+    401NotAuthenticated:
+      description: User is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthenticated
+            message: User is not authenticated to access resource.
+            code: 401
+    409Conflict:
+      description: The request conflicts with the currently loaded model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: Conflict
+            message: The request conflicts with the currently loaded model.
+            code: 409
   schemas:
     Error:
       type: object
@@ -113,43 +150,6 @@ components:
         code:
           type: number
           description: HTTP status code
-  responses:
-    409Conflict:
-      description: The request conflicts with the currently loaded model.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: Conflict
-            message: The request conflicts with the currently loaded model.
-            code: 409
-    403NotAuthorized:
-      description: User has insufficient permission.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: NotAuthorized
-            message: User has insufficient permission to access resource.
-            code: 403
-    401NotAuthenticated:
-      description: User is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: NotAuthenticated
-            message: User is not authenticated to access resource.
-            code: 401
   securitySchemes:
     TokenAuth:
       type: apiKey

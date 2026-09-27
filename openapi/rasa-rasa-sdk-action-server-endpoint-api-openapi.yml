@@ -69,6 +69,30 @@ paths:
       - Rasa SDK Action Server Endpoint
 components:
   schemas:
+    TextResponse:
+      description: Text which the bot should utter.
+      type: object
+      properties:
+        text:
+          description: The text which should be uttered.
+          type: string
+      required:
+      - text
+    Response:
+      oneOf:
+      - $ref: '#/components/schemas/TextResponse'
+      - $ref: '#/components/schemas/TemplateResponse'
+      - $ref: '#/components/schemas/ButtonResponse'
+    Button:
+      description: A button which can be clicked by the user in the conversation.
+      type: object
+      properties:
+        title:
+          type: string
+          description: The text on the button
+        payload:
+          type: string
+          description: Payload which is sent if the button is pressed.
     ButtonResponse:
       description: Text with buttons which should be sent to the user.
       type: object
@@ -80,30 +104,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Button'
-    TextResponse:
-      description: Text which the bot should utter.
-      type: object
-      properties:
-        text:
-          description: The text which should be uttered.
-          type: string
-      required:
-      - text
-    Button:
-      description: A button which can be clicked by the user in the conversation.
-      type: object
-      properties:
-        title:
-          type: string
-          description: The text on the button
-        payload:
-          type: string
-          description: Payload which is sent if the button is pressed.
-    Response:
-      oneOf:
-      - $ref: '#/components/schemas/TextResponse'
-      - $ref: '#/components/schemas/TemplateResponse'
-      - $ref: '#/components/schemas/ButtonResponse'
     TemplateResponse:
       description: Response template the bot should utter.
       type: object
