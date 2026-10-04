@@ -81,6 +81,22 @@ components:
         type: string
       required:
       - template
+    ButtonResponse:
+      description: Text with buttons which should be sent to the user.
+      type: object
+      properties:
+        text:
+          type: string
+          description: Message
+        buttons:
+          type: array
+          items:
+            $ref: '#/components/schemas/Button'
+    Response:
+      oneOf:
+      - $ref: '#/components/schemas/TextResponse'
+      - $ref: '#/components/schemas/TemplateResponse'
+      - $ref: '#/components/schemas/ButtonResponse'
     TextResponse:
       description: Text which the bot should utter.
       type: object
@@ -100,19 +116,3 @@ components:
         payload:
           type: string
           description: Payload which is sent if the button is pressed.
-    Response:
-      oneOf:
-      - $ref: '#/components/schemas/TextResponse'
-      - $ref: '#/components/schemas/TemplateResponse'
-      - $ref: '#/components/schemas/ButtonResponse'
-    ButtonResponse:
-      description: Text with buttons which should be sent to the user.
-      type: object
-      properties:
-        text:
-          type: string
-          description: Message
-        buttons:
-          type: array
-          items:
-            $ref: '#/components/schemas/Button'

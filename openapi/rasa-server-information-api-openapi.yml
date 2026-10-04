@@ -86,6 +86,33 @@ paths:
         409:
           $ref: '#/components/responses/409Conflict'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Rasa version
+        status:
+          type: string
+          enum:
+          - failure
+          description: Status of the requested action
+        message:
+          type: string
+          description: Error message
+        reason:
+          type: string
+          description: Error category
+        details:
+          type: object
+          description: Additional error information
+        help:
+          type: string
+          description: Optional URL to additonal material
+        code:
+          type: number
+          description: HTTP status code
   responses:
     403NotAuthorized:
       description: User has insufficient permission.
@@ -123,33 +150,6 @@ components:
             reason: Conflict
             message: The request conflicts with the currently loaded model.
             code: 409
-  schemas:
-    Error:
-      type: object
-      properties:
-        version:
-          type: string
-          description: Rasa version
-        status:
-          type: string
-          enum:
-          - failure
-          description: Status of the requested action
-        message:
-          type: string
-          description: Error message
-        reason:
-          type: string
-          description: Error category
-        details:
-          type: object
-          description: Additional error information
-        help:
-          type: string
-          description: Optional URL to additonal material
-        code:
-          type: number
-          description: HTTP status code
   securitySchemes:
     TokenAuth:
       type: apiKey

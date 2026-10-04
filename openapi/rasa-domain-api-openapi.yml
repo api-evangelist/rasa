@@ -38,14 +38,55 @@ paths:
         500:
           $ref: '#/components/responses/500ServerError'
 components:
+  responses:
+    406InvalidHeader:
+      description: Invalid header provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: InvalidHeader
+            message: Invalid header was provided with the request.
+            code: 406
+    500ServerError:
+      description: An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: ServerError
+            message: An unexpected error occurred.
+            code: 500
+    403NotAuthorized:
+      description: User has insufficient permission.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthorized
+            message: User has insufficient permission to access resource.
+            code: 403
+    401NotAuthenticated:
+      description: User is not authenticated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            version: 1.0.0
+            status: failure
+            reason: NotAuthenticated
+            message: User is not authenticated to access resource.
+            code: 401
   schemas:
-    IntentDescription:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          use_entities:
-            type: boolean
     TemplateDescription:
       type: object
       properties:
@@ -116,6 +157,13 @@ components:
       required:
       - type
       - auto_fill
+    IntentDescription:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          use_entities:
+            type: boolean
     Error:
       type: object
       properties:
@@ -142,54 +190,6 @@ components:
         code:
           type: number
           description: HTTP status code
-  responses:
-    406InvalidHeader:
-      description: Invalid header provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: InvalidHeader
-            message: Invalid header was provided with the request.
-            code: 406
-    500ServerError:
-      description: An unexpected error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: ServerError
-            message: An unexpected error occurred.
-            code: 500
-    403NotAuthorized:
-      description: User has insufficient permission.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: NotAuthorized
-            message: User has insufficient permission to access resource.
-            code: 403
-    401NotAuthenticated:
-      description: User is not authenticated.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            version: 1.0.0
-            status: failure
-            reason: NotAuthenticated
-            message: User is not authenticated to access resource.
-            code: 401
   securitySchemes:
     TokenAuth:
       type: apiKey
