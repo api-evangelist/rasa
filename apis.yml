@@ -156,6 +156,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/rasa-capability-edges.yml
+  name: Rasa Business Capability Map
 - type: Overlay
   url: overlays/rasa-action-server-overlay.yaml
 - type: DomainSecurity
