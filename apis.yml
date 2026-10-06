@@ -46,7 +46,7 @@ accessModel:
 image: https://rasa.com/favicon.ico
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-09-16'
+modified: '2026-10-06'
 tags:
 - Company
 - Artificial Intelligence
@@ -156,6 +156,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://rasa.com/blog
+  type: Blog
 - type: CapabilityMap
   url: capabilities/rasa-capability-edges.yml
   name: Rasa Business Capability Map
