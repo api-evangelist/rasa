@@ -1,0 +1,36 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://rasa.com/pricing
+sources:
+- https://rasa.com/pricing
+- https://rasa.com/pricing/
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: negotiated
+delivery:
+  delivery: open-core
+  method: page
+  read: '2026-10-07'
+  evidence: Free Rasa license that can be used locally or in production
+  free_edition: Free Developer Edition
+published: false
+note: Page lists two plans with no numeric prices; free edition is 'Get for free' and Enterprise is 'Contact
+  sales'. Deployment modes stated as Self-Managed (on-prem/private cloud) or Managed Service.
+plan_count: 2
+plans:
+- name: Free Developer Edition
+  price_text: Get for free
+  period: none
+  included_quota: Free Rasa license that can be used locally or in production; One bot per company, with
+    up to 1000 external conversations/month or 100 internal conversations/month; Free community support
+    in our forum.
+- name: Enterprise
+  price_text: Contact sales
+  period: none
+  included_quota: Full access to Rasa Platform & Premium Support
+rate_limit_statements:
+- One bot per company, with up to 1000 external conversations/month or 100 internal conversations/month.
