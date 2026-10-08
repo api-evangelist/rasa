@@ -34,3 +34,23 @@ plans:
   included_quota: Full access to Rasa Platform & Premium Support
 rate_limit_statements:
 - One bot per company, with up to 1000 external conversations/month or 100 internal conversations/month.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Free Developer Edition
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
