@@ -69,29 +69,16 @@ paths:
       - Rasa SDK Action Server Endpoint
 components:
   schemas:
-    TemplateResponse:
-      description: Response template the bot should utter.
+    Button:
+      description: A button which can be clicked by the user in the conversation.
       type: object
       properties:
-        template:
-          description: Name of the template
+        title:
           type: string
-      additionalProperties:
-        description: Keyword argument to fill the template
-        type: string
-      required:
-      - template
-    ButtonResponse:
-      description: Text with buttons which should be sent to the user.
-      type: object
-      properties:
-        text:
+          description: The text on the button
+        payload:
           type: string
-          description: Message
-        buttons:
-          type: array
-          items:
-            $ref: '#/components/schemas/Button'
+          description: Payload which is sent if the button is pressed.
     Response:
       oneOf:
       - $ref: '#/components/schemas/TextResponse'
@@ -106,13 +93,26 @@ components:
           type: string
       required:
       - text
-    Button:
-      description: A button which can be clicked by the user in the conversation.
+    ButtonResponse:
+      description: Text with buttons which should be sent to the user.
       type: object
       properties:
-        title:
+        text:
           type: string
-          description: The text on the button
-        payload:
+          description: Message
+        buttons:
+          type: array
+          items:
+            $ref: '#/components/schemas/Button'
+    TemplateResponse:
+      description: Response template the bot should utter.
+      type: object
+      properties:
+        template:
+          description: Name of the template
           type: string
-          description: Payload which is sent if the button is pressed.
+      additionalProperties:
+        description: Keyword argument to fill the template
+        type: string
+      required:
+      - template
