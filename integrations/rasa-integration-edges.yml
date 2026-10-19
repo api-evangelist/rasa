@@ -31,12 +31,67 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-mlops.py
   first_seen: '2026-10-15'
+- partner_name: PyPI
+  partner: pypi
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Python)
+  evidence: https://pypi.org/project/rasa/
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: rasa
+      version: 3.6.21
+      released: '2025-01-14'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/rasa/
+      repo_leg: domain:rasa.com
+      publisher_leg: email:rasa.com
+      matched_by: domain
+    - name: rasa-pro
+      version: 3.20.5
+      released: '2026-10-14'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/rasa-pro/
+      repo_leg: domain:rasa.com
+      publisher_leg: email:rasa.com
+      matched_by: domain
+    - name: rasa-sdk
+      version: 3.20.2
+      released: '2026-10-08'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/rasa-sdk/
+      repo_leg: domain:rasa.com
+      publisher_leg: email:rasa.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 generated: '2026-10-15'
 method: searched
 source:
 - https://github.com/lfai/landscape
 - https://github.com/mlcommons
 checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
 - https://github.com/kubeflow/website
 - https://github.com/lfai/landscape
 - https://github.com/mlcommons
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
