@@ -135,3 +135,16 @@
     sector: Enterprise;Infra
   status: not-a-workflow
   arazzo: null
+- slug: rasa-hugging-face-hugging-face-hub
+  label: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_name: Hugging Face (hugging-face-hub)
+  category: Hugging Face Hub datasets
+  type: marketplace
+  marketplace: hugging-face-hub
+  channel: partner-built
+  evidence: https://huggingface.co/rasa
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

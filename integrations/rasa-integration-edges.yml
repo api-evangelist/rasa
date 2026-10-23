@@ -140,6 +140,30 @@ edges:
     sector: Enterprise;Infra
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/rasa
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - rasa/command-generation-calm-demo-v1
+  - rasa/command-generation-calm-v2
+  - rasa/LaBSE
+  - rasa/command-generator-llama-3.1-8b-instruct
+  - rasa/cmd_gen_codellama_13b_calm_demo
+  - rasa/cmd_gen_llama_3.1_8b_calm_demo
+  listing_count: 2
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub datasets
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 generated: '2026-10-15'
 method: searched
 source:
@@ -168,3 +192,4 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- hugging-face/integrations/hugging-face-integration-edges.yml
